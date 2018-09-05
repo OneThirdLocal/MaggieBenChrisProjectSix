@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+img{
+    max-width: 100%;
+}
+
+html{
+	font-size: 62.5%;
+}
+
+body{
+    font-size: 1.6rem;
+}
+
+.wrapper{
+    max-width: 1080px;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.flex{
+    display: flex;
+}
