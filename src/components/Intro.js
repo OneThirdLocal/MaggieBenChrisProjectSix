@@ -46,9 +46,15 @@ class Intro extends Component {
 	}
 	render() {
 		return (
-			<div>
-				<button onClick={this.spotifyLogin}>Log In Here</button>
-			</div>
+			<header className='header'>
+				<div className='wrapper'>
+					<div className='headerText'>
+						<h1>Nobody Leaves here without singin' the blues...</h1>
+						<h3>Click the Log In button to start</h3>
+						<button onClick={this.spotifyLogin}>Log In Here</button>
+					</div>
+				</div>
+			</header>
 		);
 	}
 }
