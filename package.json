@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "firebase": "^5.4.2",
     "lyric-get": "^1.0.3",
     "node-sass-chokidar": "^1.3.3",
     "npm-run-all": "^4.1.3",
