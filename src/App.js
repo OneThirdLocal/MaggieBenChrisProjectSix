@@ -6,7 +6,6 @@ import axios from 'axios';
 import Intro from './components/Intro';
 import Form from './components/Form';
 import Lyrics from './components/Lyrics';
-import Player from './components/Player';
 import Setlist from './components/Setlist';
 
 class App extends Component {
@@ -38,6 +37,7 @@ class App extends Component {
 			this.setState({
 				accessToken: hash.access_token
 			}, () => {
+				window.location.hash = '';
 			});
 		}
 	}
@@ -129,19 +129,19 @@ class App extends Component {
 			<div className="App">
 				<h2>Main Page!!!</h2>
 				<Form getSearch={this.getSearch}/>
-				<Player accessToken={this.state.accessToken} playerURI={this.state.playerURI} />
+				<iframe title="Spotify" className="SpotifyPlayer" src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width="75%" height="80px" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
 				{this.state.type === 'artist' ? this.state.artists.map((artist) => {
 					console.log(artist);
 					return (
 						<div onClick={this.playLink} className={artist.uri} key={artist.id} id={artist.uri} >
-							<img src={artist.images[1] ? artist.images[1].url : ""} alt="" onClick={this.playLink} className={artist.uri} />
+							<img src={artist.images[1] ? artist.images[1].url : "/assets/default-artwork.png"} alt="" onClick={this.playLink} className={artist.uri} />
 							<p onClick={this.playLink} className={artist.uri} >{artist.name}</p>
 						</div>
 					)	
 				}) : this.state.tracks.map((track) => {
 					return (
 							<div onClick={this.playLink} className={track.id} key={track.uri} id={track.uri}>
-								<img src={track.album.images[2] ? track.album.images[2].url : ""} alt="" onClick={this.playLink} className={track.id} />	
+								<img src={track.album.images[2] ? track.album.images[2].url : "/assets/default-artwork.png"} alt="" onClick={this.playLink} className={track.id} />	
 								<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
 							</div>
 					)
