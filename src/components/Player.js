@@ -14,7 +14,7 @@ class Player extends Component {
         return (
             <div>
                 <h2>Spotify Player</h2>
-                <SpotifyPlayer uri="spotify:artist:3PhoLpVuITZKcymswpck5b" size={size} view={view} theme={theme} />
+                <SpotifyPlayer uri={this.props.playerURI} size={size} view={view} theme={theme} />
             </div>
         );
     }

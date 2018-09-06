@@ -29,11 +29,9 @@ class Form extends Component {
     }
 
     handleSubmit = (e) => {
-        console.log(this.state.searchOption, this.state.searchQuery);
         e.preventDefault();
         this.props.getSearch(this.state.searchOption, this.state.searchQuery);
         this.setState({
-            searchOption: "",
             searchQuery: ""
         });
 
