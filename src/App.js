@@ -112,7 +112,7 @@ class App extends Component {
 	playLink = (e) => {
 		const songID = e.target.className
 		this.setState({
-			playerURI: "spotify:track:" + songID
+			playerURI: 'spotify:track:' + songID
 		}, () => {
 			this.getSong(songID);
 		})
@@ -121,27 +121,27 @@ class App extends Component {
 	convertDuration = (timeInMs) => {
 		const minutes = ((timeInMs / 1000) / 60).toFixed(0);
 		let seconds = ((timeInMs / 1000) % 60).toFixed(0);
-		seconds < 10 ? seconds = "0" + seconds : '';
+		seconds < 10 ? seconds = '0' + seconds : '';
 		return `${minutes}:${seconds}`;
 	}
 	render() {
 		return (
-			<div className="App">
+			<div className='App'>
 				<h2>Main Page!!!</h2>
 				<Form getSearch={this.getSearch}/>
-				<iframe title="Spotify" className="SpotifyPlayer" src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width="75%" height="80px" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
+				<iframe title='Spotify' className='SpotifyPlayer' src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width='25%' height='80px' frameBorder='0' allowtransparency='true' allow='encrypted-media' />
 				{this.state.type === 'artist' ? this.state.artists.map((artist) => {
 					console.log(artist);
 					return (
 						<div onClick={this.playLink} className={artist.uri} key={artist.id} id={artist.uri} >
-							<img src={artist.images[1] ? artist.images[1].url : "/assets/default-artwork.png"} alt="" onClick={this.playLink} className={artist.uri} />
+							<img src={artist.images[1] ? artist.images[1].url : '/assets/default-artwork.png'} alt='' onClick={this.playLink} className={artist.uri} />
 							<p onClick={this.playLink} className={artist.uri} >{artist.name}</p>
 						</div>
 					)	
 				}) : this.state.tracks.map((track) => {
 					return (
 							<div onClick={this.playLink} className={track.id} key={track.uri} id={track.uri}>
-								<img src={track.album.images[2] ? track.album.images[2].url : "/assets/default-artwork.png"} alt="" onClick={this.playLink} className={track.id} />	
+								<img src={track.album.images[2] ? track.album.images[2].url : '/assets/default-artwork.png'} alt='' onClick={this.playLink} className={track.id} />	
 								<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
 							</div>
 					)
