@@ -8,8 +8,8 @@ class RoutingStuff extends Component {
         return (
             <Router>
                 <div>
-                    <Route exact path="/" component={Intro} />
-                    <Route path="/main" component={App}/>
+                    <Route exact path='/' component={Intro} />
+                    <Route path='/main' component={App}/>
                 </div>
             </Router>
         );

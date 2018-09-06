@@ -6,8 +6,8 @@ class Form extends Component {
         this.state={
             artist:{},
             track:{},
-            searchOption:"artist",
-            searchQuery:""
+            searchOption:'artist',
+            searchQuery:''
         }
     }
 
@@ -18,7 +18,7 @@ class Form extends Component {
     //on submit, pass states to parent
 
     handleChange = (e) => {
-        e.target.type === "radio" ? 
+        e.target.type === 'radio' ? 
         this.setState({
             searchOption: e.target.value
         }) :
@@ -32,7 +32,7 @@ class Form extends Component {
         e.preventDefault();
         this.props.getSearch(this.state.searchOption, this.state.searchQuery);
         this.setState({
-            searchQuery: ""
+            searchQuery: ''
         });
 
     }
@@ -40,28 +40,28 @@ class Form extends Component {
     render() {
         return (
             <div>
-                <form className="searchForm"onSubmit={this.handleSubmit}>
-                    <div className="searchRadioButtonsContainer">
-                        <input className="artistRadioButton"type="radio"
-                            id="artistSearch"
-                            value="artist"
-                            checked={this.state.searchOption === "artist"}
+                <form className='searchForm'onSubmit={this.handleSubmit}>
+                    <div className='searchRadioButtonsContainer'>
+                        <input className='artistRadioButton'type='radio'
+                            id='artistSearch'
+                            value='artist'
+                            checked={this.state.searchOption === 'artist'}
                             onChange={this.handleChange} />
-                        <label htmlFor="artist">Artist</label>
+                        <label htmlFor='artist'>Artist</label>
 
-                        <input className="trackRadioButton" type="radio"
-                            id="trackSearch"
-                            value="track"
-                            checked={this.state.searchOption === "track"}
+                        <input className='trackRadioButton' type='radio'
+                            id='trackSearch'
+                            value='track'
+                            checked={this.state.searchOption === 'track'}
                             onChange={this.handleChange} />
-                        <label htmlFor="track">Song Title</label>
+                        <label htmlFor='track'>Song Title</label>
                     </div>
-                    <input className="searchQueryContainer" required type="search"
-                        id="searchQuery"
+                    <input className='searchQueryContainer' required type='search'
+                        id='searchQuery'
                         value={this.state.searchQuery}
-                        placeholder="Enter an artist or song"
+                        placeholder='Enter an artist or song'
                         onChange={this.handleChange} />
-                    <input className="searchSubmitButton" type="submit" value="Search"/>
+                    <input className='searchSubmitButton' type='submit' value='Search'/>
                 </form>
 
             </div>
