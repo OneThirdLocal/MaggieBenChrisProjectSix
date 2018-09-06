@@ -7,6 +7,7 @@ import Intro from './components/Intro';
 import Form from './components/Form';
 import Lyrics from './components/Lyrics';
 import Setlist from './components/Setlist';
+import defaultImage from './assets/default-artwork.png'
 
 class App extends Component {
 	constructor() {
@@ -56,7 +57,8 @@ class App extends Component {
 			},
 			params: {
 				q: query,
-				type
+				type,
+				limit: 50
 			},  
 		}).then((res) => {
 			if(type === 'artist') {
@@ -64,7 +66,6 @@ class App extends Component {
 					artists: res.data.artists.items,
 					type
 				}, () => {
-					console.log(this.state.artists);
 				})
 			} else if(type === 'track') {
 				this.setState({
@@ -77,7 +78,6 @@ class App extends Component {
 		});
 	}
 	getSong = (songID) => {
-		// console.log('in get song');
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
 			axios({
 				url: `https://api.spotify.com/v1/tracks/${songID}`,
@@ -86,10 +86,8 @@ class App extends Component {
 					Authorization: AuthStr 
 				},
 			}).then((res) => {
-				console.log(res);
 				const tempSong = res.data.name.split('-');
 				const songName = tempSong[0];
-				console.log(songName);
 				const songArtist = res.data.artists[0].name;
 				this.getLyrics(songArtist, songName)
 			});	
@@ -128,8 +126,6 @@ class App extends Component {
 
 	getAlbums = (e) => {
 		const artistId = e.target.className
-		console.log(e.target.className);
-		
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
 		axios({
 			url: `https://api.spotify.com/v1/artists/${artistId}/albums`,
@@ -138,13 +134,12 @@ class App extends Component {
 				Authorization: AuthStr
 			},
 			params: {
-				include_groups: "album",
+				include_groups: 'album',
 			},  
 		}).then((res) => {
-			console.log(res.data.items);
 			this.setState({
 				albums: res.data.items,
-				type: "album"
+				type: 'album'
 			})
 			
 		});	
@@ -153,28 +148,27 @@ class App extends Component {
 	render() {
 		return (
 			<div className='App'>
-				<h2>Main Page!!!</h2>
 				<Form getSearch={this.getSearch}/>
 				<iframe title='Spotify' className='SpotifyPlayer' src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width='25%' height='80px' frameBorder='0' allowtransparency='true' allow='encrypted-media' />
 				{this.state.type === 'artist' ? this.state.artists.map((artist) => {
 					console.log(artist);
 					return (
 						<div onClick={this.playLink} className={artist.uri} key={artist.id} id={artist.uri} >
-							<img src={artist.images[1] ? artist.images[1].url : '/assets/default-artwork.png'} alt='' onClick={this.playLink} className={artist.uri} />
+							<img src={artist.images[1] ? artist.images[1].url : defaultImage} alt='' onClick={this.playLink} className={artist.uri} />
 							<p onClick={this.playLink} className={artist.uri} >{artist.name}</p>
 						</div>
 					)	
 				}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
 					return (
 							<div onClick={this.playLink} className={track.id} key={track.uri} id={track.uri}>
-								<img src={track.album.images[2] ? track.album.images[2].url : '/assets/default-artwork.png'} alt='' onClick={this.playLink} className={track.id} />	
+								<img src={track.album.images[2] ? track.album.images[2].url : defaultImage} alt='' onClick={this.playLink} className={track.id} />	
 								<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
 							</div>
 					)
 				}): this.state.albums.map((album) => {
 					return (
 						<div className={album.id} key={album.uri} id={album.uri}>
-							<img src={album.images[1].url} alt="" className={album.id}></img>
+							<img src={album.images[1].url} alt='' className={album.id}></img>
 							<p>{album.name}</p>
 
 						</div>
