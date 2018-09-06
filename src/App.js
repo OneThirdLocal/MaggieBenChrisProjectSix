@@ -14,11 +14,13 @@ class App extends Component {
 		super();
 		this.state = {
 			accessToken: '',
-			artists: []
+			artists: [],
+			tracks: [],
+			type: '',
+			playerURI: 'spotify:track:7lEptt4wbM0yJTvSG5EBof'
 		};
 	}
 	componentDidMount() {
-		console.log(window.location.hash);
 		const hash = window.location.hash
 		.substring(1)
 		.split('&')
@@ -31,17 +33,18 @@ class App extends Component {
 		}, {});
 
 		if (hash.access_token != null) {
-			console.log('There is a token');
 			this.setState({
 				accessToken: hash.access_token
 			}, () => {
-				this.getArtist(hash.access_token);
 			});
 		}
 	}
-
-	getArtist = (token) => {
-		const AuthStr = 'Bearer '.concat(token);
+	getSearch = (type, query) => {
+		this.setState({
+			artists: [],
+			tracks: []
+		})
+		const AuthStr = 'Bearer '.concat(this.state.accessToken);
 		axios({
 			url: 'https://api.spotify.com/v1/search',
 			dataResponse:'json',
@@ -49,27 +52,45 @@ class App extends Component {
 				Authorization: AuthStr 
 			},
 			params: {
-				q: 'britney spears',
-				type: 'artist'
+				q: query,
+				type
 			},  
 		}).then((res) => {
-			console.log(this.state.accessToken);
-			console.log(res);
-			this.setState({
-				artists: res.data.artists.items
-			}, () => {
-				console.log(this.state.artists);
-			})
+			if(type === 'artist') {
+				this.setState({
+					artists: res.data.artists.items,
+					type
+				}, () => {
+				})
+			} else if(type === 'track') {
+				this.setState({
+					tracks: res.data.tracks.items,
+					type
+				}, () => {
+				})
+			} 
+		});
+	}
+	playLink = (e) => {
+		this.setState({
+			playerURI: e.target.id
+		}, () => {
+
 		});
 	}
 	render() {
 		return (
 			<div className="App">
 				<h2>Main Page!!!</h2>
-				<Form />
-				{this.state.artists.map((artist) => {
+				<Form getSearch={this.getSearch}/>
+				<Player accessToken={this.state.accessToken} playerURI={this.state.playerURI} />
+				{this.state.type === 'artist' ? this.state.artists.map((artist) => {
 					return (
-						<a href={artist.external_urls.spotify} key={artist.id} id={artist.id} target="top"><p>{artist.name}</p></a>
+						<p onClick={this.playLink} key={artist.uri} id={artist.uri}>{artist.name}</p>
+					)
+				}) : this.state.tracks.map((track) => {
+					return (
+						<p onClick={this.playLink} key={track.uri} id={track.uri}>{track.name}</p>
 					)
 				})}
 			</div>
