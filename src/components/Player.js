@@ -4,9 +4,9 @@ import SpotifyPlayer from 'react-spotify-player';
 // size may also be a plain string using the presets 'large' or 'compact'
 const size = {
   width: '75%',
-  height: 300,
+  height: 80,
 };
-const view = 'coverart'; // or 'coverart'
+const view = 'list'; // or 'coverart'
 const theme = 'white'; // or 'white'
 
 class Player extends Component {

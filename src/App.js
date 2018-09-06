@@ -18,7 +18,8 @@ class App extends Component {
 			tracks: [],
 			type: '',
 			playerURI: 'spotify:track:7lEptt4wbM0yJTvSG5EBof',
-			lyrics: ''
+			lyrics: '',
+			imagesArray:[]
 		};
 	}
 	componentDidMount() {
@@ -69,6 +70,7 @@ class App extends Component {
 					tracks: res.data.tracks.items,
 					type
 				}, () => {
+
 				})
 			} 
 		});
@@ -85,27 +87,49 @@ class App extends Component {
 		})
 	}
 	playLink = (e) => {
-		console.log(this.state.tracks);
+		const songID = e.target.className
+		console.log(songID)
 		this.setState({
-			playerURI: e.target.id
+			playerURI: "spotify:track:" + songID
 		}, () => {
-
+			const AuthStr = 'Bearer '.concat(this.state.accessToken);
+			axios({
+				url: `https://api.spotify.com/v1/tracks/${songID}`,
+				dataResponse:'json',
+				headers: { 
+					Authorization: AuthStr 
+				},
+			}).then((res) => {
+				console.log(res)
+			});	
 		});
 	}
+	convertDuration = (timeInMs) => {
+		const minutes = ((timeInMs / 1000) / 60).toFixed(0);
+		let seconds = ((timeInMs / 1000) % 60).toFixed(0);
+		seconds < 10 ? seconds = "0" + seconds : '';
+		return `${minutes}:${seconds}`;
+	}
 	render() {
-		this.getLyrics();
 		return (
 			<div className="App">
 				<h2>Main Page!!!</h2>
 				<Form getSearch={this.getSearch}/>
 				<Player accessToken={this.state.accessToken} playerURI={this.state.playerURI} />
 				{this.state.type === 'artist' ? this.state.artists.map((artist) => {
+					console.log(artist);
 					return (
-						<p onClick={this.playLink} key={artist.uri} id={artist.uri}>{artist.name}</p>
-					)
+						<div onClick={this.playLink} className={artist.uri} key={artist.id} id={artist.uri} >
+							<img src={artist.images[1] ? artist.images[1].url : ""} alt="" onClick={this.playLink} className={artist.uri} />
+							<p onClick={this.playLink} className={artist.uri} >{artist.name}</p>
+						</div>
+					)	
 				}) : this.state.tracks.map((track) => {
 					return (
-						<p onClick={this.playLink} key={track.uri} id={track.uri}>{track.name}</p>
+							<div onClick={this.playLink} className={track.id} key={track.uri} id={track.uri}>
+								<img src={track.album.images[2] ? track.album.images[2].url : ""} alt="" onClick={this.playLink} className={track.id} />	
+								<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
+							</div>
 					)
 				})}
 				<p>{this.state.lyrics}</p>
