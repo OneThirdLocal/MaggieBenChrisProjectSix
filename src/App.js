@@ -75,24 +75,9 @@ class App extends Component {
 			} 
 		});
 	}
-	getLyrics = () => {
-		axios({
-			url: 'http://lyric-api.herokuapp.com/api/find/Fleetwood%20Mac/The%20Chain',
-			dataResponse: 'json',
-		}).then((res) => {
-			console.log(res.data);
-			this.setState({
-				lyrics: res.data.lyric,
-			})
-		})
-	}
-	playLink = (e) => {
-		const songID = e.target.className
-		console.log(songID)
-		this.setState({
-			playerURI: "spotify:track:" + songID
-		}, () => {
-			const AuthStr = 'Bearer '.concat(this.state.accessToken);
+	getSong = (songID) => {
+		console.log('in get song');
+		const AuthStr = 'Bearer '.concat(this.state.accessToken);
 			axios({
 				url: `https://api.spotify.com/v1/tracks/${songID}`,
 				dataResponse:'json',
@@ -100,9 +85,38 @@ class App extends Component {
 					Authorization: AuthStr 
 				},
 			}).then((res) => {
-				console.log(res)
+				console.log(res);
+				const tempSong = res.data.name.split('-');
+				const songName = tempSong[0];
+				console.log(songName);
+				const songArtist = res.data.artists[0].name;
+				this.getLyrics(songArtist, songName)
 			});	
-		});
+	}
+	getLyrics = (artist, song) => {
+		axios({
+			url: `http://lyric-api.herokuapp.com/api/find/${artist}/${song}`,
+			dataResponse: 'json',
+		}).then((res) => {
+			if(res.data.lyric) {
+				this.setState({
+					lyrics: res.data.lyric,
+				})
+			} else {
+				this.setState({
+					lyrics: 'No lyrics present'
+				})
+			}
+		})
+	}
+	playLink = (e) => {
+		const songID = e.target.className
+		this.setState({
+			playerURI: "spotify:track:" + songID
+		}, () => {
+			this.getSong(songID);
+		})
+		
 	}
 	convertDuration = (timeInMs) => {
 		const minutes = ((timeInMs / 1000) / 60).toFixed(0);
