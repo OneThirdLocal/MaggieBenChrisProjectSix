@@ -15,6 +15,7 @@ class App extends Component {
 			accessToken: '',
 			artists: [],
 			tracks: [],
+			albums: [],
 			type: '',
 			playerURI: 'spotify:track:7lEptt4wbM0yJTvSG5EBof',
 			lyrics: '',
@@ -76,7 +77,7 @@ class App extends Component {
 		});
 	}
 	getSong = (songID) => {
-		console.log('in get song');
+		// console.log('in get song');
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
 			axios({
 				url: `https://api.spotify.com/v1/tracks/${songID}`,
@@ -124,26 +125,61 @@ class App extends Component {
 		seconds < 10 ? seconds = "0" + seconds : '';
 		return `${minutes}:${seconds}`;
 	}
+
+	getAlbums = (e) => {
+		const artistId = e.target.className
+		console.log(e.target.className);
+		
+		const AuthStr = 'Bearer '.concat(this.state.accessToken);
+		axios({
+			url: `https://api.spotify.com/v1/artists/${artistId}/albums`,
+			dataResponse: 'json',
+			headers: {
+				Authorization: AuthStr
+			},
+			params: {
+				include_groups: "album",
+			},  
+		}).then((res) => {
+			console.log(res.data.items);
+			this.setState({
+				albums: res.data.items,
+				type: "album"
+			})
+			
+		});	
+		
+	}
 	render() {
 		return (
 			<div className="App">
 				<h2>Main Page!!!</h2>
 				<Form getSearch={this.getSearch}/>
+
 				<iframe title="Spotify" className="SpotifyPlayer" src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width="75%" height="80px" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
+				{/* user clicks on artist. get albums by artist. */}
 				{this.state.type === 'artist' ? this.state.artists.map((artist) => {
 					console.log(artist);
 					return (
-						<div onClick={this.playLink} className={artist.uri} key={artist.id} id={artist.uri} >
-							<img src={artist.images[1] ? artist.images[1].url : "/assets/default-artwork.png"} alt="" onClick={this.playLink} className={artist.uri} />
-							<p onClick={this.playLink} className={artist.uri} >{artist.name}</p>
+						<div onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
+							<img src={artist.images[1] ? artist.images[1].url : "/assets/default-artwork.png"} alt="" onClick={this.getAlbums} className={artist.id} />
+							<p onClick={this.getAlbums} className={artist.id} >{artist.name}</p>
 						</div>
 					)	
-				}) : this.state.tracks.map((track) => {
+				}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
 					return (
 							<div onClick={this.playLink} className={track.id} key={track.uri} id={track.uri}>
 								<img src={track.album.images[2] ? track.album.images[2].url : "/assets/default-artwork.png"} alt="" onClick={this.playLink} className={track.id} />	
 								<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
 							</div>
+					)
+				}): this.state.albums.map((album) => {
+					return (
+						<div className={album.id} key={album.uri} id={album.uri}>
+							<img src={album.images[1].url} alt="" className={album.id}></img>
+							<p>{album.name}</p>
+
+						</div>
 					)
 				})}
 				<p>{this.state.lyrics}</p>
