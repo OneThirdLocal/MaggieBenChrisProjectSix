@@ -61,6 +61,7 @@ class App extends Component {
 					artists: res.data.artists.items,
 					type
 				}, () => {
+					console.log(this.state.artists);
 				})
 			} else if(type === 'track') {
 				this.setState({
@@ -72,6 +73,7 @@ class App extends Component {
 		});
 	}
 	playLink = (e) => {
+		console.log(this.state.tracks);
 		this.setState({
 			playerURI: e.target.id
 		}, () => {
