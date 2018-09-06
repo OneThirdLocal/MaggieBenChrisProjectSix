@@ -1,0 +1,31 @@
+.header{
+    background-image: url(../assets/microphoneBackground.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    .headerText{
+        color: #ffffff;
+        text-transform: uppercase;
+        width: 60%;
+        padding-top: 150px;
+        h1,
+        h3{
+            padding: 30px 0;
+        }
+        h1{
+            font-size: 5rem;
+        }
+        button{
+            background: $primaryColor3;
+            border: none;
+            padding: 20px;
+            border-radius: 3px;
+            transition: .3s;
+            &:hover{
+                background: $primaryColor2;
+                color: #ffffff;
+            }
+        }
+    }
+}

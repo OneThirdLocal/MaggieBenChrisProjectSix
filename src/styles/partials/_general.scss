@@ -13,6 +13,8 @@ html{
 
 body{
     font-size: 1.6rem;
+    font-family: 'Work Sans', sans-serif;
+    // white-space: pre-wrap;
 }
 
 .wrapper{
@@ -23,6 +25,13 @@ body{
 
 .flex{
     display: flex;
+}
+
+h1,
+h2,
+h3,
+button{
+    font-family: 'Ubuntu', sans-serif;
 }
 
 $primaryColor1: #4913f3;
