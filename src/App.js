@@ -17,7 +17,8 @@ class App extends Component {
 			artists: [],
 			tracks: [],
 			type: '',
-			playerURI: 'spotify:track:7lEptt4wbM0yJTvSG5EBof'
+			playerURI: 'spotify:track:7lEptt4wbM0yJTvSG5EBof',
+			lyrics: ''
 		};
 	}
 	componentDidMount() {
@@ -71,6 +72,17 @@ class App extends Component {
 			} 
 		});
 	}
+	getLyrics = () => {
+		axios({
+			url: 'http://lyric-api.herokuapp.com/api/find/Fleetwood%20Mac/The%20Chain',
+			dataResponse: 'json',
+		}).then((res) => {
+			console.log(res.data);
+			this.setState({
+				lyrics: res.data.lyric,
+			})
+		})
+	}
 	playLink = (e) => {
 		this.setState({
 			playerURI: e.target.id
@@ -79,6 +91,7 @@ class App extends Component {
 		});
 	}
 	render() {
+		this.getLyrics();
 		return (
 			<div className="App">
 				<h2>Main Page!!!</h2>
@@ -93,6 +106,7 @@ class App extends Component {
 						<p onClick={this.playLink} key={track.uri} id={track.uri}>{track.name}</p>
 					)
 				})}
+				<p>{this.state.lyrics}</p>
 			</div>
 		);
 	}
