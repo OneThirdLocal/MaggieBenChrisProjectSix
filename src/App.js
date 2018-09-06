@@ -179,9 +179,9 @@ class App extends Component {
 				{this.state.type === 'artist' ? this.state.artists.map((artist) => {
 					console.log(artist);
 					return (
-						<div onClick={this.playLink} className={artist.uri} key={artist.id} id={artist.uri} >
-							<img src={artist.images[1] ? artist.images[1].url : defaultImage} alt='' onClick={this.playLink} className={artist.uri} />
-							<p onClick={this.playLink} className={artist.uri} >{artist.name}</p>
+						<div onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
+							<img src={artist.images[2] ? artist.images[2].url : defaultImage} alt='' onClick={this.getAlbums} className={artist.id} />
+							<p onClick={this.getAlbums} className={artist.id} >{artist.name}</p>
 						</div>
 					)	
 				}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
@@ -194,7 +194,7 @@ class App extends Component {
 				}): this.state.type === 'albums' ? this.state.albums.map((album) => {
 					return (
 						<div onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
-							<img src={album.images[1].url} alt="" className={album.id} onClick={this.getAlbumTracks}></img>
+							<img src={album.images[1].url} alt="" className={album.id} onClick={this.getAlbumTracks} />
 							<p onClick={this.getAlbumTracks} className={album.id}>{album.name}</p>
 
 						</div>
