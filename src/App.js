@@ -16,6 +16,7 @@ class App extends Component {
 			artists: [],
 			tracks: [],
 			albums: [],
+			albumTracks:[],
 			type: '',
 			playerURI: 'spotify:track:7lEptt4wbM0yJTvSG5EBof',
 			lyrics: '',
@@ -127,6 +128,8 @@ class App extends Component {
 	}
 
 	getAlbums = (e) => {
+		console.log("getAlbums");
+		
 		const artistId = e.target.className
 		console.log(e.target.className);
 		
@@ -144,11 +147,34 @@ class App extends Component {
 			console.log(res.data.items);
 			this.setState({
 				albums: res.data.items,
-				type: "album"
+				type: "albums"
+			},()=>{
+				
 			})
 			
 		});	
-		
+	}//getAlbums
+
+	getAlbumTracks = (e) => {
+		const albumId = e.target.className
+		console.log(e.target.className);
+
+		const AuthStr = 'Bearer '.concat(this.state.accessToken);
+		axios({
+			url: `https://api.spotify.com/v1/albums/${albumId}/tracks`,
+			dataResponse: 'json',
+			headers: {
+				Authorization: AuthStr
+			},
+		}).then((res) => {
+			console.log(res.data.items);
+			this.setState({
+				albumTracks: res.data.items,
+				type: 'albumTracks'
+			})
+
+		});	
+
 	}
 	render() {
 		return (
@@ -173,15 +199,24 @@ class App extends Component {
 								<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
 							</div>
 					)
-				}): this.state.albums.map((album) => {
+				}): this.state.type === 'albums' ? this.state.albums.map((album) => {
+					console.log("albumsssssssssssssssssssssssssssssss");
+					
 					return (
-						<div className={album.id} key={album.uri} id={album.uri}>
-							<img src={album.images[1].url} alt="" className={album.id}></img>
-							<p>{album.name}</p>
+						<div onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
+							<img src={album.images[1].url} alt="" className={album.id} onClick={this.getAlbumTracks}></img>
+							<p onClick={this.getAlbumTracks} className={album.id}>{album.name}</p>
 
 						</div>
 					)
-				})}
+				}): this.state.albumTracks.map((track) => {
+					return(
+						<div onClick={this.playLink} className={track.id} key={track.uri} id={track.uri}>
+							<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
+						</div>
+					)
+				})
+				}
 				<p>{this.state.lyrics}</p>
 			</div>
 		);
