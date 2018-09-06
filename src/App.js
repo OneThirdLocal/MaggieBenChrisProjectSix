@@ -71,6 +71,7 @@ class App extends Component {
 						<a href={artist.external_urls.spotify} key={artist.id} id={artist.id} target="top"><p>{artist.name}</p></a>
 					)
 				})}
+				<Player accessToken={this.state.accessToken}/>
 			</div>
 		);
 	}
