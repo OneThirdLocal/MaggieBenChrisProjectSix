@@ -49,7 +49,7 @@ class App extends Component {
 				Authorization: AuthStr 
 			},
 			params: {
-				q: 'elton john',
+				q: 'britney spears',
 				type: 'artist'
 			},  
 		}).then((res) => {
@@ -66,6 +66,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<h2>Main Page!!!</h2>
+				<Form />
 				{this.state.artists.map((artist) => {
 					return (
 						<a href={artist.external_urls.spotify} key={artist.id} id={artist.id} target="top"><p>{artist.name}</p></a>
