@@ -1,12 +1,17 @@
 // NODE MODULES
 import React, { Component } from 'react';
 import axios from 'axios';
+import firebase from './firebase';
 
 // COMPONENTS
 import Intro from './components/Intro';
 import Form from './components/Form';
 import Lyrics from './components/Lyrics';
-import Setlist from './components/Setlist';
+import SetList from './components/Setlist';
+import defaultImage from './assets/default-artwork.png'
+
+const dbRef = firebase.database().ref();
+
 
 class App extends Component {
 	constructor() {
@@ -16,24 +21,47 @@ class App extends Component {
 			artists: [],
 			tracks: [],
 			albums: [],
-			albumTracks:[],
+			albumTracks: [],
+			setList: [],
 			type: '',
 			playerURI: 'spotify:track:7lEptt4wbM0yJTvSG5EBof',
 			lyrics: '',
-			imagesArray:[]
+			imagesArray: [],
+			artist:"",
+			track:""
 		};
 	}
+
+	sortTracks = (trackObject) => {
+		const trackArray = Object.entries(trackObject)
+		.map((item) => {
+			console.log(item);
+			
+			return({
+				key: item[0],
+				artist: item[1].artist,
+				track: item[1].track
+			})
+		})
+		
+		this.setState({
+			setList: trackArray
+		},()=>{
+		},)
+		
+	}
+
 	componentDidMount() {
 		const hash = window.location.hash
-		.substring(1)
-		.split('&')
-		.reduce(function (initial, item) {
-			if (item) {
-				var parts = item.split('=');
-				initial[parts[0]] = decodeURIComponent(parts[1]);
-			}
-			return initial;
-		}, {});
+			.substring(1)
+			.split('&')
+			.reduce(function (initial, item) {
+				if (item) {
+					var parts = item.split('=');
+					initial[parts[0]] = decodeURIComponent(parts[1]);
+				}
+				return initial;
+			}, {});
 
 		if (hash.access_token != null) {
 			this.setState({
@@ -42,7 +70,14 @@ class App extends Component {
 				window.location.hash = '';
 			});
 		}
+
+		dbRef.on('value', (snapshot) => {
+			if(snapshot.val() !== undefined && snapshot.val() != null) {
+				this.sortTracks(snapshot.val())
+			}
+		})//dbref.on	
 	}
+
 	getSearch = (type, query) => {
 		this.setState({
 			artists: [],
@@ -51,56 +86,53 @@ class App extends Component {
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
 		axios({
 			url: 'https://api.spotify.com/v1/search',
-			dataResponse:'json',
-			headers: { 
-				Authorization: AuthStr 
+			dataResponse: 'json',
+			headers: {
+				Authorization: AuthStr
 			},
 			params: {
 				q: query,
-				type
-			},  
+				type,
+				limit: 50
+			},
 		}).then((res) => {
-			if(type === 'artist') {
+			if (type === 'artist') {
 				this.setState({
 					artists: res.data.artists.items,
 					type
 				}, () => {
-					console.log(this.state.artists);
 				})
-			} else if(type === 'track') {
+			} else if (type === 'track') {
 				this.setState({
 					tracks: res.data.tracks.items,
 					type
 				}, () => {
 
 				})
-			} 
+			}
 		});
 	}
 	getSong = (songID) => {
-		// console.log('in get song');
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
-			axios({
-				url: `https://api.spotify.com/v1/tracks/${songID}`,
-				dataResponse:'json',
-				headers: { 
-					Authorization: AuthStr 
-				},
-			}).then((res) => {
-				console.log(res);
-				const tempSong = res.data.name.split('-');
-				const songName = tempSong[0];
-				console.log(songName);
-				const songArtist = res.data.artists[0].name;
-				this.getLyrics(songArtist, songName)
-			});	
+		axios({
+			url: `https://api.spotify.com/v1/tracks/${songID}`,
+			dataResponse: 'json',
+			headers: {
+				Authorization: AuthStr
+			},
+		}).then((res) => {
+			const tempSong = res.data.name.split('-');
+			const songName = tempSong[0];
+			const songArtist = res.data.artists[0].name;
+			this.getLyrics(songArtist, songName)
+		});
 	}
 	getLyrics = (artist, song) => {
 		axios({
 			url: `http://lyric-api.herokuapp.com/api/find/${artist}/${song}`,
 			dataResponse: 'json',
 		}).then((res) => {
-			if(res.data.lyric) {
+			if (res.data.lyric) {
 				this.setState({
 					lyrics: res.data.lyric,
 				})
@@ -114,25 +146,23 @@ class App extends Component {
 	playLink = (e) => {
 		const songID = e.target.className
 		this.setState({
-			playerURI: "spotify:track:" + songID
+			playerURI: 'spotify:track:' + songID
 		}, () => {
 			this.getSong(songID);
 		})
-		
+
 	}
 	convertDuration = (timeInMs) => {
 		const minutes = ((timeInMs / 1000) / 60).toFixed(0);
 		let seconds = ((timeInMs / 1000) % 60).toFixed(0);
-		seconds < 10 ? seconds = "0" + seconds : '';
+		seconds < 10 ? seconds = '0' + seconds : '';
 		return `${minutes}:${seconds}`;
 	}
 
 	getAlbums = (e) => {
 		console.log("getAlbums");
-		
+
 		const artistId = e.target.className
-		console.log(e.target.className);
-		
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
 		axios({
 			url: `https://api.spotify.com/v1/artists/${artistId}/albums`,
@@ -141,18 +171,17 @@ class App extends Component {
 				Authorization: AuthStr
 			},
 			params: {
-				include_groups: "album",
-			},  
+				include_groups: 'album',
+			},
 		}).then((res) => {
-			console.log(res.data.items);
 			this.setState({
 				albums: res.data.items,
 				type: "albums"
-			},()=>{
-				
+			}, () => {
+
 			})
-			
-		});	
+
+		});
 	}//getAlbums
 
 	getAlbumTracks = (e) => {
@@ -173,17 +202,32 @@ class App extends Component {
 				type: 'albumTracks'
 			})
 
-		});	
+		});
 
+	}
+
+	addToSetList = (e) => {
+		
+		dbRef.push({
+			artist: e.target.className,
+			track: e.target.id
+		})
+		
+		// dbRef.on("value", (snapshot) => {
+		// 	this.setState({
+		// 		setList: snapshot.val(),
+		// 	})//setstate	
+		// })//dbref.on
+	
+		//object keys snapshot.val 
+		//map through array
+		//set setlist state as new array
 	}
 	render() {
 		return (
-			<div className="App">
-				<h2>Main Page!!!</h2>
-				<Form getSearch={this.getSearch}/>
-
-				<iframe title="Spotify" className="SpotifyPlayer" src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width="75%" height="80px" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
-				{/* user clicks on artist. get albums by artist. */}
+			<div className='App'>
+				<Form getSearch={this.getSearch} />
+				<iframe title='Spotify' className='SpotifyPlayer' src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width='25%' height='80px' frameBorder='0' allowtransparency='true' allow='encrypted-media' />
 				{this.state.type === 'artist' ? this.state.artists.map((artist) => {
 					console.log(artist);
 					return (
@@ -191,17 +235,16 @@ class App extends Component {
 							<img src={artist.images[2] ? artist.images[2].url : defaultImage} alt='' onClick={this.getAlbums} className={artist.id} />
 							<p onClick={this.getAlbums} className={artist.id} >{artist.name}</p>
 						</div>
-					)	
+					)
 				}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
 					return (
-							<div onClick={this.playLink} className={track.id} key={track.uri} id={track.uri}>
-								<img src={track.album.images[2] ? track.album.images[2].url : "/assets/default-artwork.png"} alt="" onClick={this.playLink} className={track.id} />	
-								<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
-							</div>
+						<div className={track.id} key={track.uri} id={track.uri}>
+							<img src={track.album.images[2] ? track.album.images[2].url : defaultImage} alt='' onClick={this.playLink} className={track.id} />
+							<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
+							<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
+						</div>
 					)
-				}): this.state.type === 'albums' ? this.state.albums.map((album) => {
-					console.log("albumsssssssssssssssssssssssssssssss");
-					
+				}) : this.state.type === 'albums' ? this.state.albums.map((album) => {
 					return (
 						<div onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
 							<img src={album.images[1].url} alt="" className={album.id} onClick={this.getAlbumTracks} />
@@ -209,14 +252,16 @@ class App extends Component {
 
 						</div>
 					)
-				}): this.state.albumTracks.map((track) => {
-					return(
-						<div onClick={this.playLink} className={track.id} key={track.uri} id={track.uri}>
-							<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
-						</div>
-					)
-				})
+				})	: this.state.albumTracks.map((track) => {
+						return(
+							<div className={track.id} key={track.uri} id={track.uri}>
+								<button onClick={this.addToSetList} className={track.artists[0].name}id={track.name}>Add To List</button>
+								<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
+							</div>
+						)
+					})
 				}
+				<SetList setList={this.state.setList} />
 				<p>{this.state.lyrics}</p>
 			</div>
 		);
