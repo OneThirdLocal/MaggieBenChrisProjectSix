@@ -4,7 +4,7 @@ class Lyrics extends Component {
     render() {
         return (
             <div>
-
+                <p>{this.props.lyrics}</p>
             </div>
         );
     }

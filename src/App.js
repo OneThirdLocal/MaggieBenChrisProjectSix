@@ -12,6 +12,7 @@ import defaultImage from './assets/default-artwork.png'
 class App extends Component {
 	constructor() {
 		super();
+		//	set the initial state
 		this.state = {
 			accessToken: '',
 			artists: [],
@@ -21,9 +22,11 @@ class App extends Component {
 			type: '',
 			playerURI: 'spotify:track:7lEptt4wbM0yJTvSG5EBof',
 			lyrics: '',
-			imagesArray:[]
+			imagesArray:[],
+			searchResults: ''
 		};
 	}
+	//	on componentDidMount, 
 	componentDidMount() {
 		const hash = window.location.hash
 		.substring(1)
@@ -40,14 +43,15 @@ class App extends Component {
 			this.setState({
 				accessToken: hash.access_token
 			}, () => {
-				window.location.hash = '';
 			});
 		}
 	}
 	getSearch = (type, query) => {
 		this.setState({
 			artists: [],
-			tracks: []
+			tracks: [],
+			lyrics: '',
+			searchResults: ''
 		})
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
 		axios({
@@ -63,19 +67,40 @@ class App extends Component {
 			},  
 		}).then((res) => {
 			if(type === 'artist') {
-				this.setState({
-					artists: res.data.artists.items,
-					type
-				}, () => {
-				})
+				if(res.data.artists.items.length === 0) {
+					this.setState({
+						searchResults: 'Your search returned no results. Please try again.'
+					}, () => {
+					})
+				} else {
+					this.setState({
+						searchResults: 'Search successful',
+						artists: res.data.artists.items,
+						type
+					}, () => {
+					})
+				}
 			} else if(type === 'track') {
-				this.setState({
-					tracks: res.data.tracks.items,
-					type
-				}, () => {
-
-				})
+				if(res.data.tracks.items.length === 0) {
+					this.setState({
+						searchResults: 'Your search returned no results. Please try again.'
+					}, () => {
+					})
+				} else {
+					this.setState({
+						searchResults: 'Search successful',
+						tracks: res.data.tracks.items,
+						type
+					}, () => {
+					})
+				}
 			} 
+		}).catch((error) => {
+			if(error) {
+				this.setState({
+					searchResults: 'Your search was unsuccessful. Please try again.'
+				})
+			}
 		});
 	}
 	getSong = (songID) => {
@@ -87,6 +112,7 @@ class App extends Component {
 					Authorization: AuthStr 
 				},
 			}).then((res) => {
+				console.log(res);
 				const tempSong = res.data.name.split('-');
 				const songName = tempSong[0];
 				const songArtist = res.data.artists[0].name;
@@ -101,10 +127,12 @@ class App extends Component {
 			if(res.data.lyric) {
 				this.setState({
 					lyrics: res.data.lyric,
+				}, () => {
 				})
 			} else {
 				this.setState({
 					lyrics: 'No lyrics present'
+				}, () => {
 				})
 			}
 		})
@@ -126,8 +154,6 @@ class App extends Component {
 	}
 
 	getAlbums = (e) => {
-		console.log("getAlbums");
-		
 		const artistId = e.target.className
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
 		axios({
@@ -140,6 +166,7 @@ class App extends Component {
 				include_groups: 'album',
 			},  
 		}).then((res) => {
+			console.log(res)
 			this.setState({
 				albums: res.data.items,
 				type: "albums"
@@ -147,13 +174,17 @@ class App extends Component {
 				
 			})
 			
-		});	
+		}).catch((error) => {
+			if(error) {
+				this.setState({
+					searchResults: 'Your search was unsuccessful. Please try again.'
+				})
+			}
+		});
 	}//getAlbums
 
 	getAlbumTracks = (e) => {
 		const albumId = e.target.className
-		console.log(e.target.className);
-
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
 		axios({
 			url: `https://api.spotify.com/v1/albums/${albumId}/tracks`,
@@ -168,7 +199,13 @@ class App extends Component {
 				type: 'albumTracks'
 			})
 
-		});	
+		}).catch((error) => {
+			if(error) {
+				this.setState({
+					searchResults: 'Your search was unsuccessful. Please try again.'
+				})
+			}
+		});
 
 	}
 	render() {
@@ -176,38 +213,42 @@ class App extends Component {
 			<div className='App'>
 				<Form getSearch={this.getSearch}/>
 				<iframe title='Spotify' className='SpotifyPlayer' src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width='25%' height='80px' frameBorder='0' allowtransparency='true' allow='encrypted-media' />
-				{this.state.type === 'artist' ? this.state.artists.map((artist) => {
-					console.log(artist);
-					return (
-						<div onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
-							<img src={artist.images[2] ? artist.images[2].url : defaultImage} alt='' onClick={this.getAlbums} className={artist.id} />
-							<p onClick={this.getAlbums} className={artist.id} >{artist.name}</p>
-						</div>
-					)	
-				}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
-					return (
+				<Lyrics lyrics={this.state.lyrics}/>
+				<h3>{this.state.searchResults}</h3>
+				<section className='resultsPane'>
+					{this.state.type === 'artist' ? 
+						this.state.artists.map((artist) => {
+							return (
+								<div onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
+									<img src={artist.images[2] ? artist.images[2].url : defaultImage} alt='' onClick={this.getAlbums} className={artist.id} />
+									<p onClick={this.getAlbums} className={artist.id} >{artist.name}</p>
+								</div>
+							)	
+					}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
+						return (
+								<div onClick={this.playLink} className={track.id} key={track.uri} id={track.uri}>
+									<img src={track.album.images[2] ? track.album.images[2].url : defaultImage} alt='' onClick={this.playLink} className={track.id} />	
+									<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
+								</div>
+						)
+					}): this.state.type === 'albums' ? this.state.albums.map((album) => {
+						return (
+							<div onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
+								<img src={album.images[1].url} alt="" className={album.id} onClick={this.getAlbumTracks} />
+								<p onClick={this.getAlbumTracks} className={album.id}>{album.name}</p>
+
+							</div>
+						)
+					}) : this.state.albumTracks.map((track) => {
+						return(
 							<div onClick={this.playLink} className={track.id} key={track.uri} id={track.uri}>
-								<img src={track.album.images[2] ? track.album.images[2].url : defaultImage} alt='' onClick={this.playLink} className={track.id} />	
 								<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
 							</div>
-					)
-				}): this.state.type === 'albums' ? this.state.albums.map((album) => {
-					return (
-						<div onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
-							<img src={album.images[1].url} alt="" className={album.id} onClick={this.getAlbumTracks} />
-							<p onClick={this.getAlbumTracks} className={album.id}>{album.name}</p>
-
-						</div>
-					)
-				}): this.state.albumTracks.map((track) => {
-					return(
-						<div onClick={this.playLink} className={track.id} key={track.uri} id={track.uri}>
-							<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
-						</div>
-					)
-				})
-				}
-				<p>{this.state.lyrics}</p>
+						)
+					})
+					}
+				</section>
+				<Setlist lyrics={this.state.lyrics} />
 			</div>
 		);
 	}
