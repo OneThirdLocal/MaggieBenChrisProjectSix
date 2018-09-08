@@ -73,6 +73,8 @@ class App extends Component {
 			if(snapshot.val() !== undefined && snapshot.val() != null) {
 				this.sortTracks(snapshot.val())
 			}
+			console.log(snapshot.val());
+			
 		})//dbref.on	
 	}
 
@@ -258,6 +260,16 @@ class App extends Component {
 			track: e.target.id
 		})
 	}
+
+	deleteFromList = (key) => {
+		console.log(key);
+		
+		dbRef.child(key).remove();
+		console.log(key);
+				
+		console.log("delete clicked");
+		
+	}
 	render() {
 		return (
 			<div className='App'>
@@ -298,7 +310,7 @@ class App extends Component {
 						})
 					}
 				</section>
-				<SetList setList={this.state.setList} getLyrics={this.getLyrics} />
+				<SetList setList={this.state.setList} getLyrics={this.getLyrics} deleteFromList={this.deleteFromList} />
 			</div>
 		);
 	}
