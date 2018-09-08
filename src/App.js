@@ -268,32 +268,31 @@ class App extends Component {
 				<section className='resultsPane'>
 					{this.state.type === 'artist' ? this.state.artists.map((artist) => {
 						return (
-							<div onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
+							<figure onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
 								<img src={artist.images[2] ? artist.images[2].url : defaultImage} alt='' onClick={this.getAlbums} className={artist.id} />
-								<p onClick={this.getAlbums} className={artist.id} >{artist.name}</p>
-							</div>
+								<figcaption onClick={this.getAlbums} className={artist.id} >{artist.name}</figcaption>
+							</figure>
 						)
 					}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
 						return (
-							<div className={track.id} key={track.uri} id={track.uri}>
+							<figure className={track.id} key={track.uri} id={track.uri}>
 								<img src={track.album.images[2] ? track.album.images[2].url : defaultImage} alt='' onClick={this.playLink} className={track.id} />
+								<figcaption onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</figcaption>
 								<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
-								<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
-							</div>
+							</figure>
 						)
 					}) : this.state.type === 'albums' ? this.state.albums.map((album) => {
 						return (
-							<div onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
+							<figure onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
 								<img src={album.images[1].url} alt='' className={album.id} onClick={this.getAlbumTracks} />
-								<p onClick={this.getAlbumTracks} className={album.id}>{album.name}</p>
-
-							</div>
+								<figcaption onClick={this.getAlbumTracks} className={album.id}>{album.name}</figcaption>
+							</figure>
 						)
 					})	: this.state.albumTracks.map((track) => {
 							return(
 								<div className={track.id} key={track.uri} id={track.uri}>
-									<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
 									<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
+									<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
 								</div>
 							)
 						})
