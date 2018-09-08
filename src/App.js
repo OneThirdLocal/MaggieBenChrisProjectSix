@@ -25,19 +25,17 @@ class App extends Component {
 			albumTracks: [],
 			setList: [],
 			type: '',
-			playerURI: 'spotify:track:7lEptt4wbM0yJTvSG5EBof',
+			playerURI: 'spotify:track:2GAIycsMaDVtMtdvxzR2xI',
 			lyrics: '',
 			imagesArray: [],
-			artist:"",
-			track:""
+			artist:'',
+			track:''
 		};
 	}
 
 	sortTracks = (trackObject) => {
 		const trackArray = Object.entries(trackObject)
 		.map((item) => {
-			console.log(item);
-			
 			return({
 				key: item[0],
 				artist: item[1].artist,
@@ -106,7 +104,7 @@ class App extends Component {
 					})
 				} else {
 					this.setState({
-						searchResults: 'Search successful',
+						searchResults: `Results of your search for - ${query}`,
 						artists: res.data.artists.items,
 						type
 					}, () => {
@@ -120,7 +118,7 @@ class App extends Component {
 					})
 				} else {
 					this.setState({
-						searchResults: 'Search successful',
+						searchResults: `Results of your search for - ${query}`,
 						tracks: res.data.tracks.items,
 						type
 					}, () => {
@@ -144,15 +142,14 @@ class App extends Component {
 				Authorization: AuthStr
 			},
 		}).then((res) => {
-			const tempSong = res.data.name.split('-');
-			const songName = tempSong[0];
-			const songArtist = res.data.artists[0].name;
-			this.getLyrics(songArtist, songName)
+			this.getLyrics(res.data.artists[0].name, res.data.name)
 		});
 	}
 	getLyrics = (artist, song) => {
+		const tempSong = song.split('-');
+		const songName = tempSong[0];
 		axios({
-			url: `http://lyric-api.herokuapp.com/api/find/${artist}/${song}`,
+			url: `http://lyric-api.herokuapp.com/api/find/${artist}/${songName}`,
 			dataResponse: 'json',
 		}).then((res) => {
 			if (res.data.lyric) {
@@ -180,13 +177,13 @@ class App extends Component {
 	convertDuration = (timeInMs) => {
 		const minutes = ((timeInMs / 1000) / 60).toFixed(0);
 		let seconds = ((timeInMs / 1000) % 60).toFixed(0);
-		seconds < 10 ? seconds = '0' + seconds : '';
+		if (seconds < 10) {
+			seconds = '0' + seconds;
+		}
 		return `${minutes}:${seconds}`;
 	}
 
 	getAlbums = (e) => {
-		console.log("getAlbums");
-
 		const artistId = e.target.className
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
 		axios({
@@ -199,14 +196,19 @@ class App extends Component {
 				include_groups: 'album',
 			},
 		}).then((res) => {
-			console.log(res)
-			this.setState({
-				albums: res.data.items,
-				type: "albums"
-			}, () => {
-
-			})
-			
+			if(res.data.items.length === 0) {
+				this.setState({
+					searchResults: 'There were no albums for the selected artist'
+				})
+			} else {
+				this.setState({
+					albums: res.data.items,
+					type: 'albums',
+					searchResults: `Album listing for - ${res.data.items[0].artists[0].name}`
+				}, () => {
+	
+				})
+			}
 		}).catch((error) => {
 			if(error) {
 				this.setState({
@@ -220,18 +222,26 @@ class App extends Component {
 		const albumId = e.target.className
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
 		axios({
-			url: `https://api.spotify.com/v1/albums/${albumId}/tracks`,
+			url: `https://api.spotify.com/v1/albums/${albumId}/`,
 			dataResponse: 'json',
 			headers: {
 				Authorization: AuthStr
 			},
 		}).then((res) => {
-			console.log(res.data.items);
-			this.setState({
-				albumTracks: res.data.items,
-				type: 'albumTracks'
-			})
-
+			console.log(res);
+			if(res.data.tracks.items.length === 0) {
+				this.setState({
+					searchResults: 'The selected album has no tracks listed'
+				})
+			} else {
+				const albumName = res.data.name;
+				const artistName = res.data.artists[0].name;
+				this.setState({
+					albumTracks: res.data.tracks.items,
+					type: 'albumTracks',
+					searchResults: `Track listing for ${artistName} - ${albumName}`
+				})
+			}
 		}).catch((error) => {
 			if(error) {
 				this.setState({
@@ -243,21 +253,10 @@ class App extends Component {
 	}
 
 	addToSetList = (e) => {
-		
 		dbRef.push({
 			artist: e.target.className,
 			track: e.target.id
 		})
-		
-		// dbRef.on("value", (snapshot) => {
-		// 	this.setState({
-		// 		setList: snapshot.val(),
-		// 	})//setstate	
-		// })//dbref.on
-	
-		//object keys snapshot.val 
-		//map through array
-		//set setlist state as new array
 	}
 	render() {
 		return (
@@ -268,40 +267,38 @@ class App extends Component {
 				<h3>{this.state.searchResults}</h3>
 				<section className='resultsPane'>
 					{this.state.type === 'artist' ? this.state.artists.map((artist) => {
-						console.log(artist);
 						return (
-							<div onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
+							<figure onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
 								<img src={artist.images[2] ? artist.images[2].url : defaultImage} alt='' onClick={this.getAlbums} className={artist.id} />
-								<p onClick={this.getAlbums} className={artist.id} >{artist.name}</p>
-							</div>
+								<figcaption onClick={this.getAlbums} className={artist.id} >{artist.name}</figcaption>
+							</figure>
 						)
 					}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
 						return (
-							<div className={track.id} key={track.uri} id={track.uri}>
+							<figure className={track.id} key={track.uri} id={track.uri}>
 								<img src={track.album.images[2] ? track.album.images[2].url : defaultImage} alt='' onClick={this.playLink} className={track.id} />
+								<figcaption onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</figcaption>
 								<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
-								<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
-							</div>
+							</figure>
 						)
 					}) : this.state.type === 'albums' ? this.state.albums.map((album) => {
 						return (
-							<div onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
-								<img src={album.images[1].url} alt="" className={album.id} onClick={this.getAlbumTracks} />
-								<p onClick={this.getAlbumTracks} className={album.id}>{album.name}</p>
-
-							</div>
+							<figure onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
+								<img src={album.images[1].url} alt='' className={album.id} onClick={this.getAlbumTracks} />
+								<figcaption onClick={this.getAlbumTracks} className={album.id}>{album.name}</figcaption>
+							</figure>
 						)
 					})	: this.state.albumTracks.map((track) => {
 							return(
 								<div className={track.id} key={track.uri} id={track.uri}>
-									<button onClick={this.addToSetList} className={track.artists[0].name}id={track.name}>Add To List</button>
 									<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
+									<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
 								</div>
 							)
 						})
 					}
 				</section>
-				<SetList setList={this.state.setList} />
+				<SetList setList={this.state.setList} getLyrics={this.getLyrics} />
 			</div>
 		);
 	}
