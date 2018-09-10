@@ -1,33 +1,56 @@
 .mainHeader{
-    background-image: url(../assets/microphoneBackgroundMain.jpg);
+    background-image: url(../assets/microphoneBackground.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
-    background-position: top left;
-    min-height: 50vh;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
-.mainHeading,
-form{
+.mainHeadingContainer{
+    float: left;
+    width: 50%;
+}
+
+.lyricsContainer{
+    background: rgba(255,255,255,.12);
+    border-radius: 3px;
+    width: 100%;
+    // margin-left: 100px;
+    padding: 20px;
+    h3{
+        margin: 0 auto;
+        padding-bottom: 40px;
+    }
+}
+
+.mainHeading{
     padding: 20px 0;
-    border-bottom: 2px solid $primaryColor1;
     text-transform: uppercase;
     h1{
-        padding-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $primaryColor1;
     }
-    label{
-        padding: 20px 10px;
-        margin: 5px;
-        border-radius: 50px;
-        background: $primaryColor2;
-        font-size: 1.2rem;
-        &:hover{
-        cursor: pointer;
-        }
+    h3{
+        padding-top: 10px;
     }
 }
 
 form{
+    padding-top: 20px;
+    text-transform: uppercase;
     text-align: center;
+    label{
+        padding: 5px 10px;
+        margin: 5px;
+        color: lightgray;
+        &:hover{
+        cursor: pointer;
+        color: #ffffff;
+        }
+    }
+    button{
+        margin: 5px;
+    }
 }
 
 .searchQueryContainer{
@@ -46,7 +69,9 @@ form{
 input[type="radio"]{
     display: none;
     &:checked+label{
-        background: $primaryColor1;
+        // background: $primaryColor1;
+        color: #ffffff;
+        border-bottom: 2px solid $primaryColor1;
     }
 }
 
@@ -56,10 +81,12 @@ iframe{
 }
 
 .content{
-    background: rgba(255, 255, 255, .12);
+    background: rgba(82, 80, 80, 0.4);
     padding: 20px;
-    margin: 20px auto;
+    margin: 20px 0 20px 50px;
     border-radius: 3px;
+    float: left;
+    width: calc(50% - 50px);
 }
 
 .resultsPane{

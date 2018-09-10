@@ -61,9 +61,6 @@ class Form extends Component {
                             checked={this.state.searchOption === 'track'}
                             onChange={this.handleChange} />
                         <label htmlFor='trackSearch'>Track</label>
-                    </div>
-
-                    <div>
                         <button className='button'>Search</button>
                     </div>
                 </form>
