@@ -13,15 +13,15 @@ class setList extends Component {
     render() {
         return (
             <div>
-                <h2>Setlist</h2>
+                <h2 className="setListHeading">Setlist</h2>
                 <ul className='setList'>
                     {this.props.setList !== null ? Object.keys(this.props.setList).map((key) => {                        
                         return (
                             <div className='setListItem' key={key}>
                                 <li key={key} className={this.props.setList[key].artist} id={this.props.setList[key].track} onClick={this.handleClick}>
+                                <button className='deleteFromListButton' onClick={() => this.props.deleteFromList(this.props.setList[key].key)}>x</button>
                                     {this.props.setList[key].artist} - {this.props.setList[key].track}
                                 </li>
-                                <button className='button deleteFromListButton' onClick={() => this.props.deleteFromList(this.props.setList[key].key)}>Delete</button>
                             </div>
                         )
                     })//map
