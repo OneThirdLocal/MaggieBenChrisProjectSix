@@ -284,13 +284,28 @@ iframe {
   border-radius: 3px; }
 
 .content {
-  background: #4913f3;
+  background: rgba(255, 255, 255, 0.12);
   padding: 20px;
   margin: 20px auto;
   border-radius: 3px; }
 
 .resultsPane {
-  transition: transform 1s, position 1.5s; }
+  transition: transform 1s, position 1.5s;
+  margin: 0 auto; }
+
+.resultsContainer {
+  margin: 0 auto; }
 
 .lyrics {
   white-space: pre-wrap; }
+
+figure {
+  float: left;
+  width: 200px;
+  margin: 30px 30px; }
+  figure img {
+    width: 200px;
+    height: 200px; }
+
+figcaption {
+  height: 3rem; }

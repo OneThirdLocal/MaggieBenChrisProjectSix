@@ -56,7 +56,7 @@ iframe{
 }
 
 .content{
-    background: $primaryColor1;
+    background: rgba(255, 255, 255, .12);
     padding: 20px;
     margin: 20px auto;
     border-radius: 3px;
@@ -64,8 +64,28 @@ iframe{
 
 .resultsPane{
     transition: transform 1s, position 1.5s;
+    margin: 0 auto;
 }
+
+.resultsContainer {
+    margin: 0 auto;
+}
+
 
 .lyrics{
     white-space: pre-wrap;
+}
+
+figure {
+    float: left;
+    width: 200px;
+    margin:30px 30px;
+        img {
+            width: 200px;
+            height: 200px;
+        }
+}
+
+figcaption {
+    height: 3rem;
 }
