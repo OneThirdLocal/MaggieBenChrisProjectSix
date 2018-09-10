@@ -8,7 +8,8 @@
         color: #ffffff;
         text-transform: uppercase;
         width: 60%;
-        padding-top: 150px;
+        padding-top: 15%;
+        padding-bottom: 5%;
         h1,
         h3{
             padding: 30px 0;
@@ -16,16 +17,17 @@
         h1{
             font-size: 5rem;
         }
-        button{
-            background: $primaryColor3;
-            border: none;
-            padding: 20px;
-            border-radius: 3px;
-            transition: .3s;
-            &:hover{
-                background: $primaryColor2;
-                color: #ffffff;
-            }
+    }
+}
+
+@media (max-width: 600px){
+    .header .headerText {
+        padding-left: 25px;
+        h1{
+            font-size: 3.5rem;
+        }
+        h3{
+            display: none;
         }
     }
 }

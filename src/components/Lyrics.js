@@ -4,7 +4,7 @@ class Lyrics extends Component {
     render() {
         return (
             <div className='lyricsPane'>
-                <p>{this.props.lyrics}</p>
+                <p className='lyrics'>{this.props.lyrics}</p>
             </div>
         );
     }
