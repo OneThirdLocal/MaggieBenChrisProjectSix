@@ -1,5 +1,6 @@
 .mainHeader{
     background-image: url(../assets/microphoneBackground.jpg);
+    background-position: top right;
 	background-repeat: no-repeat;
 	background-size: cover;
     background-attachment: fixed;
@@ -12,7 +13,7 @@
 }
 
 .lyricsContainer{
-    background: rgba(255,255,255,.12);
+    background: rgba(82, 80, 80, 0.4);
     border-radius: 3px;
     width: 100%;
     // margin-left: 100px;
@@ -106,7 +107,7 @@ iframe{
 figure {
     float: left;
     width: 200px;
-    margin:30px 30px;
+    margin:30px 20px;
         img {
             width: 200px;
             height: 200px;
