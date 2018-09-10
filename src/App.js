@@ -303,10 +303,9 @@ class App extends Component {
 							</div>
 							<Form getSearch={this.getSearch} />
 							<iframe title='Spotify' className='SpotifyPlayer' src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width='100%' height='80px' frameBorder='0' allowtransparency='true' allow='encrypted-media' />
-							<div className='lyricsContainer'>
-								<h3>{this.state.currentSong}</h3>
-								<Lyrics lyrics={this.state.lyrics} />
-							</div>
+							{this.state.lyrics ?
+							<Lyrics lyrics={this.state.lyrics} currentSong={this.state.currentSong} />
+							: ''}
 						</div>
 						<div className='content'>
 							<div>
@@ -316,7 +315,7 @@ class App extends Component {
 								<div className="resultsContainer clearfix">
 
 
-									<h3 className="resultsHeading">{this.state.searchResults}</h3>
+									<h2 className="resultsHeading">{this.state.searchResults}</h2>
 									{this.state.type === 'artist' ? this.state.artists.map((artist) => {
 										return (
 											<figure onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
