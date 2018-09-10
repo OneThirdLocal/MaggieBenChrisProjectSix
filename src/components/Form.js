@@ -40,30 +40,33 @@ class Form extends Component {
     render() {
         return (
             <div>
-                <form className='searchForm'onSubmit={this.handleSubmit}>
+                <form className='searchForm' onSubmit={this.handleSubmit}>
+                    <input className='searchQueryContainer' required type='search'
+                        id='searchQuery'
+                        value={this.state.searchQuery}
+                        placeholder='Enter an artist or song'
+                        onChange={this.handleChange} />
+        
                     <div className='searchRadioButtonsContainer'>
-                        <input className='artistRadioButton'type='radio'
+                        <input className='artistRadioButton' type='radio'
                             id='artistSearch'
                             value='artist'
                             checked={this.state.searchOption === 'artist'}
                             onChange={this.handleChange} />
-                        <label htmlFor='artist'>Artist</label>
+                        <label htmlFor='artistSearch'>Artist</label>
 
                         <input className='trackRadioButton' type='radio'
                             id='trackSearch'
                             value='track'
                             checked={this.state.searchOption === 'track'}
                             onChange={this.handleChange} />
-                        <label htmlFor='track'>Song Title</label>
+                        <label htmlFor='trackSearch'>Track</label>
                     </div>
-                    <input className='searchQueryContainer' required type='search'
-                        id='searchQuery'
-                        value={this.state.searchQuery}
-                        placeholder='Enter an artist or song'
-                        onChange={this.handleChange} />
-                    <input className='searchSubmitButton' type='submit' value='Search'/>
-                </form>
 
+                    <div>
+                        <button className='button'>Search</button>
+                    </div>
+                </form>
             </div>
         );
     }

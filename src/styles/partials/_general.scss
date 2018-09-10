@@ -1,3 +1,7 @@
+$primaryColor1: #4913f3;
+$primaryColor2: #8b98fd;
+$primaryColor3: #f5c900;
+
 *{
     margin: 0;
     padding: 0;
@@ -14,7 +18,8 @@ html{
 body{
     font-size: 1.6rem;
     font-family: 'Work Sans', sans-serif;
-    // white-space: pre-wrap;
+    background: #000000;
+    color: #ffffff;
 }
 
 .wrapper{
@@ -23,17 +28,61 @@ body{
     margin: 0 auto;
 }
 
-.flex{
-    display: flex;
+.hide{
+    animation: test 1s;
+    animation-delay: .6s;
+    animation-fill-mode: forwards;
+    transform: translate(-170%);
+}
+
+@keyframes test {
+    from{
+        position: static;
+
+    }
+    to{
+        position: absolute;
+    }
+}
+
+.show{
+    transform: translate(0%);
 }
 
 h1,
 h2,
-h3,
-button{
+h3{
     font-family: 'Ubuntu', sans-serif;
+    color: #ffffff;
 }
 
-$primaryColor1: #4913f3;
-$primaryColor2: #8b98fd;
-$primaryColor3: #f5c900;
+.button{
+    font-family: 'Ubuntu', sans-serif;
+    background: $primaryColor3;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    transition: .3s;
+    &:hover{
+        background: $primaryColor2;
+        color: #ffffff;
+    }
+}
+
+li{
+    list-style-type: none;
+}
+
+@media (max-width: 600px){
+    .button{
+        &:hover{
+            background: $primaryColor3;
+            color: #000000;
+        }
+        &:active{
+            background: $primaryColor2;
+            color: #ffffff;
+        }
+    }
+}

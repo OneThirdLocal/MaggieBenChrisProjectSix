@@ -4,7 +4,7 @@ import axios from 'axios';
 import firebase from './firebase';
 
 // COMPONENTS
-import Intro from './components/Intro';
+// import Intro from './components/Intro';
 import Form from './components/Form';
 import Lyrics from './components/Lyrics';
 import SetList from './components/Setlist';
@@ -270,47 +270,71 @@ class App extends Component {
 		console.log("delete clicked");
 		
 	}
+
+	hideResults = () => {
+		if (document.getElementById('resultsPane').classList.contains('show')) {
+			document.getElementById('resultsPane').classList.remove('show');
+			document.getElementById('resultsPane').classList.add('hide');
+		} else {
+			document.getElementById('resultsPane').classList.remove('hide');
+			document.getElementById('resultsPane').classList.add('show');
+		}
+	}
+	
 	render() {
 		return (
 			<div className='App'>
-				<Form getSearch={this.getSearch} />
-				<iframe title='Spotify' className='SpotifyPlayer' src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width='25%' height='80px' frameBorder='0' allowtransparency='true' allow='encrypted-media' />
-				<Lyrics lyrics={this.state.lyrics}/>
-				<h3>{this.state.searchResults}</h3>
-				<section className='resultsPane'>
-					{this.state.type === 'artist' ? this.state.artists.map((artist) => {
-						return (
-							<figure onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
-								<img src={artist.images[2] ? artist.images[2].url : defaultImage} alt='' onClick={this.getAlbums} className={artist.id} />
-								<figcaption onClick={this.getAlbums} className={artist.id} >{artist.name}</figcaption>
-							</figure>
-						)
-					}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
-						return (
-							<figure className={track.id} key={track.uri} id={track.uri}>
-								<img src={track.album.images[2] ? track.album.images[2].url : defaultImage} alt='' onClick={this.playLink} className={track.id} />
-								<figcaption onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</figcaption>
-								<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
-							</figure>
-						)
-					}) : this.state.type === 'albums' ? this.state.albums.map((album) => {
-						return (
-							<figure onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
-								<img src={album.images[1].url} alt='' className={album.id} onClick={this.getAlbumTracks} />
-								<figcaption onClick={this.getAlbumTracks} className={album.id}>{album.name}</figcaption>
-							</figure>
-						)
-					})	: this.state.albumTracks.map((track) => {
-							return(
-								<div className={track.id} key={track.uri} id={track.uri}>
-									<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
-									<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
-								</div>
+				<div className='mainHeader'>
+					<div className='wrapper'>
+						<div className='mainHeading'>
+							<h1>Karaoke!</h1>
+							<h3>Search your favourite band or song below and start singing!</h3>
+						</div>
+						<Form getSearch={this.getSearch} />
+						<iframe title='Spotify' className='SpotifyPlayer' src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width='100%' height='80px' frameBorder='0' allowtransparency='true' allow='encrypted-media' />
+					</div>
+				</div>
+				<div className='wrapper content'>
+					<Lyrics lyrics={this.state.lyrics}/>
+					<div>
+						<button className='button' onClick={this.hideResults}>Hide / Show Results</button>
+					</div>
+					<section className='resultsPane show' id='resultsPane'>
+						<h3>{this.state.searchResults}</h3>
+						{this.state.type === 'artist' ? this.state.artists.map((artist) => {
+							return (
+								<figure onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
+									<img src={artist.images[2] ? artist.images[2].url : defaultImage} alt='' onClick={this.getAlbums} className={artist.id} />
+									<figcaption onClick={this.getAlbums} className={artist.id} >{artist.name}</figcaption>
+								</figure>
 							)
-						})
-					}
-				</section>
-				<SetList setList={this.state.setList} getLyrics={this.getLyrics} deleteFromList={this.deleteFromList} />
+						}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
+							return (
+								<figure className={track.id} key={track.uri} id={track.uri}>
+									<img src={track.album.images[2] ? track.album.images[2].url : defaultImage} alt='' onClick={this.playLink} className={track.id} />
+									<figcaption onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</figcaption>
+									<button onClick={this.addToSetList} className={`button ${track.artists[0].name}`} id={track.name}>Add To List</button>
+								</figure>
+							)
+						}) : this.state.type === 'albums' ? this.state.albums.map((album) => {
+							return (
+								<figure onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
+									<img src={album.images[1].url} alt='' className={album.id} onClick={this.getAlbumTracks} />
+									<figcaption onClick={this.getAlbumTracks} className={album.id}>{album.name}</figcaption>
+								</figure>
+							)
+						})	: this.state.albumTracks.map((track) => {
+								return(
+									<div className={track.id} key={track.uri} id={track.uri}>
+										<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
+										<button onClick={this.addToSetList} className={`button ${track.artists[0].name}`} id={track.name}>Add To List</button>
+									</div>
+								)
+							})
+						}
+					</section>
+					<SetList setList={this.state.setList} getLyrics={this.getLyrics} deleteFromList={this.deleteFromList} />
+				</div>
 			</div>
 		);
 	}

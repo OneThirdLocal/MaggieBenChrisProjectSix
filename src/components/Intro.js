@@ -51,7 +51,7 @@ class Intro extends Component {
 					<div className='headerText'>
 						<h1>Nobody Leaves here without singin' the blues...</h1>
 						<h3>Click the Log In button to start</h3>
-						<button onClick={this.spotifyLogin}>Log In Here</button>
+						<button className='button' onClick={this.spotifyLogin}>Log In Here</button>
 					</div>
 				</div>
 			</header>
