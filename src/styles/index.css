@@ -235,33 +235,47 @@ li {
       display: none; } }
 
 .mainHeader {
-  background-image: url(../assets/microphoneBackgroundMain.jpg);
+  background-image: url(../assets/microphoneBackground.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: top left;
-  min-height: 50vh; }
+  background-attachment: fixed;
+  min-height: 100vh; }
 
-.mainHeading,
-form {
+.mainHeadingContainer {
+  float: left;
+  width: 50%; }
+
+.lyricsContainer {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  width: 100%;
+  padding: 20px; }
+  .lyricsContainer h3 {
+    margin: 0 auto;
+    padding-bottom: 40px; }
+
+.mainHeading {
   padding: 20px 0;
-  border-bottom: 2px solid #4913f3;
   text-transform: uppercase; }
-  .mainHeading h1,
-  form h1 {
-    padding-bottom: 20px; }
-  .mainHeading label,
-  form label {
-    padding: 20px 10px;
-    margin: 5px;
-    border-radius: 50px;
-    background: #8b98fd;
-    font-size: 1.2rem; }
-    .mainHeading label:hover,
-    form label:hover {
-      cursor: pointer; }
+  .mainHeading h1 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4913f3; }
+  .mainHeading h3 {
+    padding-top: 10px; }
 
 form {
+  padding-top: 20px;
+  text-transform: uppercase;
   text-align: center; }
+  form label {
+    padding: 5px 10px;
+    margin: 5px;
+    color: lightgray; }
+    form label:hover {
+      cursor: pointer;
+      color: #ffffff; }
+  form button {
+    margin: 5px; }
 
 .searchQueryContainer {
   width: 100%;
@@ -277,17 +291,20 @@ form {
 input[type="radio"] {
   display: none; }
   input[type="radio"]:checked + label {
-    background: #4913f3; }
+    color: #ffffff;
+    border-bottom: 2px solid #4913f3; }
 
 iframe {
   margin: 20px 0;
   border-radius: 3px; }
 
 .content {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(82, 80, 80, 0.4);
   padding: 20px;
-  margin: 20px auto;
-  border-radius: 3px; }
+  margin: 20px 0 20px 50px;
+  border-radius: 3px;
+  float: left;
+  width: calc(50% - 50px); }
 
 .resultsPane {
   transition: transform 1s, position 1.5s;

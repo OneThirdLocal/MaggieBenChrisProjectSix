@@ -29,7 +29,8 @@ class App extends Component {
 			lyrics: '',
 			imagesArray: [],
 			artist:'',
-			track:''
+			track: '',
+			currentSong: ''
 		};
 	}
 
@@ -157,6 +158,7 @@ class App extends Component {
 			if (res.data.lyric) {
 				this.setState({
 					lyrics: res.data.lyric,
+					currentSong: song
 				}, () => {
 				})
 			} else {
@@ -285,59 +287,64 @@ class App extends Component {
 		return (
 			<div className='App'>
 				<div className='mainHeader'>
-					<div className='wrapper'>
-						<div className='mainHeading'>
-							<h1>Karaoke!</h1>
-							<h3>Search your favourite band or song below and start singing!</h3>
+					<div className='wrapper clearfix'>
+						<div className='mainHeadingContainer'>
+							<div className='mainHeading'>
+								<h1>Karaoke!</h1>
+								<h3>Search your favourite band or song below and start singing!</h3>
+							</div>
+							<Form getSearch={this.getSearch} />
+							<iframe title='Spotify' className='SpotifyPlayer' src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width='100%' height='80px' frameBorder='0' allowtransparency='true' allow='encrypted-media' />
+							<div className='lyricsContainer'>
+								<h3>{this.state.currentSong}</h3>
+								<Lyrics lyrics={this.state.lyrics} />
+							</div>
 						</div>
-						<Form getSearch={this.getSearch} />
-						<iframe title='Spotify' className='SpotifyPlayer' src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width='100%' height='80px' frameBorder='0' allowtransparency='true' allow='encrypted-media' />
-					</div>
-				</div>
-				<div className='wrapper content'>
-					<Lyrics lyrics={this.state.lyrics}/>
-					<div>
-						<button className='button' onClick={this.hideResults}>Hide / Show Results</button>
-					</div>
-					<section className='resultsPane show' id='resultsPane'>
-						<div className="resultsContainer clearfix">
+						<div className='content'>
+							<div>
+								<button className='button' onClick={this.hideResults}>Hide / Show Results</button>
+							</div>
+							<section className='resultsPane show' id='resultsPane'>
+								<div className="resultsContainer clearfix">
 
 
-							<h3>{this.state.searchResults}</h3>
-							{this.state.type === 'artist' ? this.state.artists.map((artist) => {
-								return (
-									<figure onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
-										<img src={artist.images[2] ? artist.images[2].url : defaultImage} alt='' onClick={this.getAlbums} className={artist.id} />
-										<figcaption onClick={this.getAlbums} className={artist.id} >{artist.name}</figcaption>
-									</figure>
-								)
-							}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
-								return (
-									<figure className={track.id} key={track.uri} id={track.uri}>
-										<img src={track.album.images[2] ? track.album.images[2].url : defaultImage} alt='' onClick={this.playLink} className={track.id} />
-										<figcaption onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</figcaption>
-										<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
-									</figure>
-								)
-							}) : this.state.type === 'albums' ? this.state.albums.map((album) => {
-								return (
-									<figure onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
-										<img src={album.images[1].url} alt='' className={album.id} onClick={this.getAlbumTracks} />
-										<figcaption onClick={this.getAlbumTracks} className={album.id}>{album.name}</figcaption>
-									</figure>
-								)
-							})	: this.state.albumTracks.map((track) => {
-									return(
-										<div className={track.id} key={track.uri} id={track.uri}>
-											<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
-											<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
-										</div>
-									)
-								})
-							}
+									<h3>{this.state.searchResults}</h3>
+									{this.state.type === 'artist' ? this.state.artists.map((artist) => {
+										return (
+											<figure onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
+												<img src={artist.images[2] ? artist.images[2].url : defaultImage} alt='' onClick={this.getAlbums} className={artist.id} />
+												<figcaption onClick={this.getAlbums} className={artist.id} >{artist.name}</figcaption>
+											</figure>
+										)
+									}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
+										return (
+											<figure className={track.id} key={track.uri} id={track.uri}>
+												<img src={track.album.images[2] ? track.album.images[2].url : defaultImage} alt='' onClick={this.playLink} className={track.id} />
+												<figcaption onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</figcaption>
+												<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
+											</figure>
+										)
+									}) : this.state.type === 'albums' ? this.state.albums.map((album) => {
+										return (
+											<figure onClick={this.getAlbumTracks} className={album.id} key={album.uri} id={album.uri}>
+												<img src={album.images[1].url} alt='' className={album.id} onClick={this.getAlbumTracks} />
+												<figcaption onClick={this.getAlbumTracks} className={album.id}>{album.name}</figcaption>
+											</figure>
+										)
+									}) : this.state.albumTracks.map((track) => {
+										return (
+											<div className={track.id} key={track.uri} id={track.uri}>
+												<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
+												<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
+											</div>
+										)
+									})
+									}
+								</div>
+							</section>
+							<SetList setList={this.state.setList} getLyrics={this.getLyrics} deleteFromList={this.deleteFromList} />
 						</div>
-					</section>
-					<SetList setList={this.state.setList} getLyrics={this.getLyrics} deleteFromList={this.deleteFromList} />
+					</div>
 				</div>
 			</div>
 		);
