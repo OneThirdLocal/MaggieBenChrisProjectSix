@@ -9,6 +9,7 @@ import Form from './components/Form';
 import Lyrics from './components/Lyrics';
 import SetList from './components/Setlist';
 import defaultImage from './assets/default-artwork.png'
+import plusIcon from './assets/plus-circle-solid.svg'
 
 const dbRef = firebase.database().ref();
 
@@ -35,6 +36,7 @@ class App extends Component {
 	}
 
 	sortTracks = (trackObject) => {
+		if (trackObject){
 		const trackArray = Object.entries(trackObject)
 		.map((item) => {
 			return({
@@ -48,6 +50,13 @@ class App extends Component {
 			setList: trackArray
 		},()=>{
 		},)
+	} else {
+		this.setState({
+			setList:'',
+		}), () => {
+
+		}
+	}
 		
 	}
 
@@ -71,9 +80,8 @@ class App extends Component {
 		}
 
 		dbRef.on('value', (snapshot) => {
-			if(snapshot.val() !== undefined && snapshot.val() != null) {
+			
 				this.sortTracks(snapshot.val())
-			}
 			console.log(snapshot.val());
 			
 		})//dbref.on	
@@ -296,10 +304,9 @@ class App extends Component {
 							</div>
 							<Form getSearch={this.getSearch} />
 							<iframe title='Spotify' className='SpotifyPlayer' src={`https://embed.spotify.com/?uri=${this.state.playerURI}&view=list&theme=black`} width='100%' height='80px' frameBorder='0' allowtransparency='true' allow='encrypted-media' />
-							<div className='lyricsContainer'>
-								<h3>{this.state.currentSong}</h3>
-								<Lyrics lyrics={this.state.lyrics} />
-							</div>
+							{this.state.lyrics ?
+							<Lyrics lyrics={this.state.lyrics} currentSong={this.state.currentSong} />
+							: ''}
 						</div>
 						<div className='content'>
 							<div>
@@ -309,7 +316,7 @@ class App extends Component {
 								<div className="resultsContainer clearfix">
 
 
-									<h3>{this.state.searchResults}</h3>
+									<h2 className="resultsHeading">{this.state.searchResults}</h2>
 									{this.state.type === 'artist' ? this.state.artists.map((artist) => {
 										return (
 											<figure onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >
@@ -320,8 +327,8 @@ class App extends Component {
 									}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
 										return (
 											<div className={track.id} key={track.uri} id={track.uri}>
+												<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}><a href='#setList' className={track.artists[0].name} id={track.name}>+</a></button>
 												<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
-												<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
 											</div>
 										)
 									}) : this.state.type === 'albums' ? this.state.albums.map((album) => {

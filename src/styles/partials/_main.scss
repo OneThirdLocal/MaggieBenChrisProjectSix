@@ -29,9 +29,11 @@
     h1{
         padding-bottom: 10px;
         border-bottom: 1px solid $primaryColor1;
+        width: 75%;
     }
     h3{
         padding-top: 10px;
+        width: 75%;
     }
 }
 
@@ -94,10 +96,75 @@ iframe{
     margin: 0 auto;
 }
 
-.resultsContainer {
-    margin: 0 auto;
+.resultsHeading, .setListHeading {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid white;
 }
 
+.resultsContainer {
+    margin: 0 auto;
+        div {
+            margin-bottom: 10px;
+        }
+        button {
+            width: 22px;
+            height: 20px;
+            background: black;
+            border: none;
+            padding-bottom: 20px;
+            border-radius: 50%;
+            text-align: center;
+            a {
+                text-decoration: none;
+                color: white;
+                border-radius: 50%;
+                border: 1.5px white solid;
+                padding-bottom: 20px;
+                width: 22px;
+                height: 20px;
+                display: inline-block;
+                text-align: center;
+
+                }
+        }
+
+        
+
+        p {
+            display: inline;
+            margin-left: 10px;
+            line-height: 26px;
+            &:hover{
+                cursor: url(../assets/favicon.ico), auto;
+            }
+        }
+}
+
+.setListItem {
+        li {
+            display: inline-block;
+            margin-bottom: 10px;
+            line-height: 26px;
+            &:hover{
+                cursor: url(../assets/favicon.ico), auto;
+            }
+        }
+
+        button {
+            width: 20px;
+            height: 20px;
+            background: red;
+            border: none;
+            padding-bottom: 21px;
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            margin-right: 10px;
+
+        }
+}
 
 .lyrics{
     white-space: pre-wrap;
@@ -116,3 +183,4 @@ figure {
 figcaption {
     height: 3rem;
 }
+

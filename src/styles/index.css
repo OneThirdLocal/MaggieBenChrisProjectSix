@@ -260,9 +260,11 @@ li {
   text-transform: uppercase; }
   .mainHeading h1 {
     padding-bottom: 10px;
-    border-bottom: 1px solid #4913f3; }
+    border-bottom: 1px solid #4913f3;
+    width: 75%; }
   .mainHeading h3 {
-    padding-top: 10px; }
+    padding-top: 10px;
+    width: 75%; }
 
 form {
   padding-top: 20px;
@@ -311,8 +313,58 @@ iframe {
   transition: transform 1s, position 1.5s;
   margin: 0 auto; }
 
+.resultsHeading, .setListHeading {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid white; }
+
 .resultsContainer {
   margin: 0 auto; }
+  .resultsContainer div {
+    margin-bottom: 10px; }
+  .resultsContainer button {
+    width: 22px;
+    height: 20px;
+    background: black;
+    border: none;
+    padding-bottom: 20px;
+    border-radius: 50%;
+    text-align: center; }
+    .resultsContainer button a {
+      text-decoration: none;
+      color: white;
+      border-radius: 50%;
+      border: 1.5px white solid;
+      padding-bottom: 20px;
+      width: 22px;
+      height: 20px;
+      display: inline-block;
+      text-align: center; }
+  .resultsContainer p {
+    display: inline;
+    margin-left: 10px;
+    line-height: 26px; }
+    .resultsContainer p:hover {
+      cursor: url(../assets/favicon.ico), auto; }
+
+.setListItem li {
+  display: inline-block;
+  margin-bottom: 10px;
+  line-height: 26px; }
+  .setListItem li:hover {
+    cursor: url(../assets/favicon.ico), auto; }
+
+.setListItem button {
+  width: 20px;
+  height: 20px;
+  background: red;
+  border: none;
+  padding-bottom: 21px;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  margin-right: 10px; }
 
 .lyrics {
   white-space: pre-wrap; }
