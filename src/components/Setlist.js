@@ -21,7 +21,7 @@ class setList extends Component {
                                 <li key={key} className={this.props.setList[key].artist} id={this.props.setList[key].track} onClick={this.handleClick}>
                                     {this.props.setList[key].artist} - {this.props.setList[key].track}
                                 </li>
-                            <button className='button deleteFromListButton' onClick={() => this.props.deleteFromList(this.props.setList[key].key)}>Delete</button>
+                                <button className='button deleteFromListButton' onClick={() => this.props.deleteFromList(this.props.setList[key].key)}>Delete</button>
                             </div>
                         )
                     })//map
