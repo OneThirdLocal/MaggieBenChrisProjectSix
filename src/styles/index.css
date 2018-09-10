@@ -323,11 +323,20 @@ iframe {
     width: 22px;
     height: 20px;
     background: black;
-    border: 1.5px solid white;
+    border: none;
     padding-bottom: 20px;
     border-radius: 50%;
-    color: white;
     text-align: center; }
+    .resultsContainer button a {
+      text-decoration: none;
+      color: white;
+      border-radius: 50%;
+      border: 1.5px white solid;
+      padding-bottom: 20px;
+      width: 22px;
+      height: 20px;
+      display: inline-block;
+      text-align: center; }
   .resultsContainer p {
     display: inline;
     margin-left: 10px; }

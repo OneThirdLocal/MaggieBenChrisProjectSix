@@ -12,7 +12,7 @@ class setList extends Component {
     }
     render() {
         return (
-            <div>
+            <div id='setList'>
                 <h2 className="setListHeading">Setlist</h2>
                 <ul className='setList'>
                     {this.props.setList !== null ? Object.keys(this.props.setList).map((key) => {                        

@@ -327,7 +327,7 @@ class App extends Component {
 									}) : this.state.type === 'track' ? this.state.tracks.map((track) => {
 										return (
 											<div className={track.id} key={track.uri} id={track.uri}>
-												<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>+</button>
+												<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}><a href='#setList' className={track.artists[0].name} id={track.name}>+</a></button>
 												<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
 											</div>
 										)
