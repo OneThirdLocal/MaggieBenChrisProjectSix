@@ -23,7 +23,7 @@ body{
 }
 
 .wrapper{
-    max-width: 1080px;
+    max-width: 1200px;
     width: 95%;
     margin: 0 auto;
 }
@@ -32,7 +32,8 @@ body{
     animation: test 1s;
     animation-delay: .6s;
     animation-fill-mode: forwards;
-    transform: translate(-170%);
+    // transform: translate(+170%);
+    transform: translateY(-120%);
 }
 
 @keyframes test {
@@ -46,7 +47,7 @@ body{
 }
 
 .show{
-    transform: translate(0%);
+    transform: translateY(0%);
 }
 
 h1,

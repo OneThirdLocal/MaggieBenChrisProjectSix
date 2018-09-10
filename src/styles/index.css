@@ -160,7 +160,7 @@ body {
   color: #ffffff; }
 
 .wrapper {
-  max-width: 1080px;
+  max-width: 1200px;
   width: 95%;
   margin: 0 auto; }
 
@@ -168,7 +168,7 @@ body {
   animation: test 1s;
   animation-delay: .6s;
   animation-fill-mode: forwards;
-  transform: translate(-170%); }
+  transform: translateY(-120%); }
 
 @keyframes test {
   from {
@@ -177,7 +177,7 @@ body {
     position: absolute; } }
 
 .show {
-  transform: translate(0%); }
+  transform: translateY(0%); }
 
 h1,
 h2,
@@ -236,6 +236,7 @@ li {
 
 .mainHeader {
   background-image: url(../assets/microphoneBackground.jpg);
+  background-position: top right;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -246,7 +247,7 @@ li {
   width: 50%; }
 
 .lyricsContainer {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(82, 80, 80, 0.4);
   border-radius: 3px;
   width: 100%;
   padding: 20px; }
@@ -319,7 +320,7 @@ iframe {
 figure {
   float: left;
   width: 200px;
-  margin: 30px 30px; }
+  margin: 30px 20px; }
   figure img {
     width: 200px;
     height: 200px; }
