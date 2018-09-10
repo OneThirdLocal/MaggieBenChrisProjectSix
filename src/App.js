@@ -257,6 +257,7 @@ class App extends Component {
 	}
 
 	addToSetList = (e) => {
+		console.log(e);
 		dbRef.push({
 			artist: e.target.className,
 			track: e.target.id
@@ -331,14 +332,6 @@ class App extends Component {
 											</figure>
 										)
 									}) : ''
-									// : this.state.albumTracks.map((track) => {
-									// 	return (
-									// 		<div className={track.id} key={track.uri} id={track.uri}>
-									// 			<p onClick={this.playLink} className={track.id}>{track.artists[0].name} - {track.name} - {this.convertDuration(track.duration_ms)}</p>
-									// 			<button onClick={this.addToSetList} className={track.artists[0].name} id={track.name}>Add To List</button>
-									// 		</div>
-									// 	)
-									// })
 									}
 								</div>
 							</section>
