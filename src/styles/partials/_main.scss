@@ -95,10 +95,52 @@ iframe{
     margin: 0 auto;
 }
 
-.resultsContainer {
-    margin: 0 auto;
+.resultsHeading, .setListHeading {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
+.resultsContainer {
+    margin: 0 auto;
+        div {
+            margin-bottom: 10px;
+        }
+        button {
+            width: 22px;
+            height: 20px;
+            background: black;
+            border: 1.5px solid white;
+            padding-bottom: 20px;
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+        }
+
+        p {
+            display: inline;
+            margin-left: 10px;
+        }
+}
+
+.setListItem {
+        li {
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+
+        button {
+            width: 20px;
+            height: 20px;
+            background: red;
+            border: none;
+            padding-bottom: 21px;
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            margin-right: 10px;
+
+        }
+}
 
 .lyrics{
     white-space: pre-wrap;
@@ -117,3 +159,4 @@ figure {
 figcaption {
     height: 3rem;
 }
+
