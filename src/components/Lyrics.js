@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 class Lyrics extends Component {
     hideLyrics = () => {
@@ -12,13 +12,13 @@ class Lyrics extends Component {
     }
     render() {
         return (
-            <section>
+            <Fragment>
                 <button className='lyricsButton' onClick={this.hideLyrics}>Hide / Show Lyrics</button>
-                    <div className='lyricsContainer show' id='lyricsPane'>
+                <section className='lyricsContainer show' id='lyricsPane'>
                         <h3>{this.props.currentSong}</h3>
                         <p className='lyrics'>{this.props.lyrics}</p>
-                    </div>
-            </section>
+                </section>
+            </Fragment>
         );
     }
 }

@@ -290,9 +290,6 @@ form {
 .lyricsContainer.show {
   width: 100%; }
 
-.lyricsButton {
-  display: none; }
-
 .lyrics {
   white-space: pre-wrap; }
 
