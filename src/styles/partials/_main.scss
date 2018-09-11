@@ -140,7 +140,7 @@ form{
         padding-bottom: 20px;
         border-radius: 50%;
         text-align: center;
-        &:focus,
+        &:focus a,
         &:hover a{
             color: $primaryColor2;
             border: 1.5px $primaryColor2 solid;
@@ -161,7 +161,6 @@ form{
         display: inline;
         margin-left: 10px;
         line-height: 26px;
-        &:focus,
         &:hover{
             cursor: url(../assets/favicon.ico), auto;
         }
@@ -198,7 +197,6 @@ form{
     li {
         display: inline;
         line-height: 30px;
-        &:focus,
         &:hover{
             cursor: url(../assets/favicon.ico), auto;
         }
@@ -285,10 +283,41 @@ form{
             width: 75px;
             margin: 20px calc((100% - 300px) / 8);
         }
+        button:hover a{
+            color: white;
+            border: 1.5px white solid;
+            &:active a{
+                color: $primaryColor2;
+                border: 1.5px $primaryColor2 solid;
+            }
+        }
+        p:hover{
+            cursor: default;
+            &:active{
+                cursor: url(../assets/favicon.ico), auto;
+            }
+        }
     }
 
     .lyricsContainer {
         width: 100%;
+    }
+
+    .setListItem {
+        li:hover{
+            cursor: default;
+            &:active{
+                cursor: url(../assets/favicon.ico), auto;
+            }
+        }
+        button:hover{
+            background: red;
+            color: white;
+            &:active{
+                background: #ffffff;
+                color: red;
+            }
+        }
     }
 
 }

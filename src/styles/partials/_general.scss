@@ -58,10 +58,7 @@ li{
 ////////////////////MEDIA QUERIES/////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 
-@media (max-width: 700px){
-    // .wrapper {
-    //     max-width: 550px;
-    // }
+@media (max-width: 900px){
     .button{
         &:hover{
             background: $primaryColor3;
