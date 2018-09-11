@@ -342,21 +342,21 @@ form {
     line-height: 26px; }
     .resultsContainer p:hover {
       cursor: url(../assets/favicon.ico), auto; }
+  .resultsContainer figure {
+    float: left;
+    width: 200px;
+    margin: 30px 20px; }
+    .resultsContainer figure img {
+      width: 200px;
+      height: 200px; }
+    .resultsContainer figure figcaption {
+      height: 3rem; }
 
 .resultsHeading, .setListHeading {
   margin-top: 15px;
   margin-bottom: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid white; }
-  .resultsHeading figure, .setListHeading figure {
-    float: left;
-    width: 200px;
-    margin: 30px 20px; }
-    .resultsHeading figure img, .setListHeading figure img {
-      width: 200px;
-      height: 200px; }
-    .resultsHeading figure figcaption, .setListHeading figure figcaption {
-      height: 3rem; }
 
 .setListItem li {
   display: inline-block;
