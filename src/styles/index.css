@@ -161,7 +161,7 @@ body {
 
 .wrapper {
   max-width: 1200px;
-  width: 95%;
+  width: 90%;
   margin: 0 auto; }
 
 h1,
@@ -187,8 +187,6 @@ li {
   list-style-type: none; }
 
 @media (max-width: 700px) {
-  .wrapper {
-    width: 550px; }
   .button:hover {
     background: #f5c900;
     color: #000000; }
@@ -270,7 +268,7 @@ form {
   border-radius: 3px; }
 
 .searchRadioButtonsContainer {
-  margin: 30px 0;
+  margin: 15px 0 30px 0;
   text-align: center; }
   .searchRadioButtonsContainer input[type='radio'] {
     display: none; }
@@ -309,7 +307,7 @@ form {
   animation: test 1s;
   animation-delay: .6s;
   animation-fill-mode: forwards;
-  transform: translateY(-200%); }
+  transform: translateY(-700%); }
 
 @keyframes test {
   from {
@@ -359,7 +357,7 @@ form {
   .resultsContainer figure {
     float: left;
     width: 200px;
-    margin: 30px calc((100% - 400px) / 4);
+    margin: 20px calc((100% - 400px) / 4);
     transition: .3s; }
     .resultsContainer figure:focus, .resultsContainer figure:hover {
       transform: scale(1.1);
@@ -368,7 +366,8 @@ form {
       width: 200px;
       height: 200px; }
     .resultsContainer figure figcaption {
-      height: 3rem; }
+      overflow: hidden;
+      height: 4rem; }
 
 .resultsHeading, .setListHeading {
   margin-top: 15px;
@@ -377,9 +376,8 @@ form {
   border-bottom: 1px solid white; }
 
 .setListItem li {
-  display: inline-block;
-  margin-bottom: 10px;
-  line-height: 26px; }
+  display: inline;
+  line-height: 30px; }
   .setListItem li:focus, .setListItem li:hover {
     cursor: url(../assets/favicon.ico), auto; }
 
@@ -400,35 +398,57 @@ form {
 @media (max-width: 1200px) {
   .resultsContainer figure {
     width: 150px;
-    margin: 25px calc((100% - 300px) / 4); }
+    margin: 20px calc((100% - 300px) / 4); }
     .resultsContainer figure img {
       width: 150px;
-      height: 150px; }
-    .resultsContainer figure figcaption {
-      height: 3rem; } }
+      height: 150px; } }
 
 @media (max-width: 900px) {
   .resultsPane {
-    margin-bottom: 100px; }
+    margin-bottom: 50px; }
+  .resultsContainer figure {
+    width: 75px;
+    margin: 20px calc((100% - 225px) / 6); }
+    .resultsContainer figure img {
+      width: 75px;
+      height: 75px; }
+  .show {
+    display: block; }
+  .hide {
+    display: none; } }
+
+@media (max-width: 700px) {
+  .mainHeadingContainer, .content {
+    float: none;
+    width: 100%; }
+  .mainHeadingContainer {
+    background: rgba(82, 80, 80, 0.4); }
+  .content {
+    margin: 0; }
+  .resultsContainer figure {
+    width: 75px;
+    margin: 20px calc((100% - 300px) / 8); }
+  .lyricsContainer {
+    width: 100%; } }
+
+@media (max-width: 475px) {
+  .resultsPane {
+    margin-bottom: 30px; }
   .resultsContainer figure {
     width: 75px;
     margin: 35px calc((100% - 225px) / 6); }
     .resultsContainer figure img {
       width: 75px;
       height: 75px; }
-    .resultsContainer figure figcaption {
-      height: 3rem; } }
-
-@media (max-width: 700px) {
-  .mainHeadingContainer, .content {
-    float: none;
-    width: 100%; }
+  .searchRadioButtonsContainer {
+    margin-bottom: 5px; }
+    .searchRadioButtonsContainer button {
+      margin-top: 20px; }
+  .lyricsSection {
+    text-align: center; }
+  .lyricsButton {
+    margin-left: 0; }
+  .resultsHeading, .setList, .lyrics {
+    text-align: left; }
   .content {
-    margin: 0; }
-  .resultsContainer figure {
-    width: 75px;
-    margin: 35px calc((100% - 300px) / 8); }
-  .hide {
-    transform: translateY(-700%); }
-  .lyricsContainer {
-    width: 100%; } }
+    text-align: center; } }
