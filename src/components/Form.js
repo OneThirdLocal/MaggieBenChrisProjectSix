@@ -46,7 +46,6 @@ class Form extends Component {
                         value={this.state.searchQuery}
                         placeholder='Enter an artist or song'
                         onChange={this.handleChange} />
-        
                     <div className='searchRadioButtonsContainer'>
                         <input className='artistRadioButton' type='radio'
                             id='artistSearch'
@@ -54,7 +53,6 @@ class Form extends Component {
                             checked={this.state.searchOption === 'artist'}
                             onChange={this.handleChange} />
                         <label htmlFor='artistSearch'>Artist</label>
-
                         <input className='trackRadioButton' type='radio'
                             id='trackSearch'
                             value='track'

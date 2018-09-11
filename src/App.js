@@ -4,15 +4,12 @@ import axios from 'axios';
 import firebase from './firebase';
 
 // COMPONENTS
-// import Intro from './components/Intro';
 import Form from './components/Form';
 import Lyrics from './components/Lyrics';
 import SetList from './components/Setlist';
 import defaultImage from './assets/default-artwork.png'
-import plusIcon from './assets/plus-circle-solid.svg'
 
 const dbRef = firebase.database().ref();
-
 
 class App extends Component {
 	constructor() {
@@ -34,7 +31,6 @@ class App extends Component {
 			currentSong: ''
 		};
 	}
-
 	sortTracks = (trackObject) => {
 		if (trackObject){
 		const trackArray = Object.entries(trackObject)
@@ -45,7 +41,6 @@ class App extends Component {
 				track: item[1].track
 			})
 		})
-		
 		this.setState({
 			setList: trackArray
 		},()=>{
@@ -54,12 +49,9 @@ class App extends Component {
 		this.setState({
 			setList:'',
 		}), () => {
-
 		}
 	}
-		
-	}
-
+}
 	componentDidMount() {
 		const hash = window.location.hash
 			.substring(1)
@@ -71,19 +63,14 @@ class App extends Component {
 				}
 				return initial;
 			}, {});
-
 		if (hash.access_token != null) {
 			this.setState({
 				accessToken: hash.access_token
 			}, () => {
 			});
 		}
-
 		dbRef.on('value', (snapshot) => {
-			
-				this.sortTracks(snapshot.val())
-			console.log(snapshot.val());
-			
+			this.sortTracks(snapshot.val())
 		})//dbref.on	
 	}
 
@@ -265,7 +252,6 @@ class App extends Component {
 	}
 
 	addToSetList = (e) => {
-		console.log(e);
 		dbRef.push({
 			artist: e.target.className,
 			track: e.target.id
@@ -273,13 +259,7 @@ class App extends Component {
 	}
 
 	deleteFromList = (key) => {
-		console.log(key);
-		
 		dbRef.child(key).remove();
-		console.log(key);
-				
-		console.log("delete clicked");
-		
 	}
 
 	hideResults = () => {
