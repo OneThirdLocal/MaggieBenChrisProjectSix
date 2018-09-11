@@ -4,12 +4,10 @@ import axios from 'axios';
 import firebase from './firebase';
 
 // COMPONENTS
-// import Intro from './components/Intro';
 import Form from './components/Form';
 import Lyrics from './components/Lyrics';
 import SetList from './components/Setlist';
 import defaultImage from './assets/default-artwork.png'
-import plusIcon from './assets/plus-circle-solid.svg'
 
 const dbRef = firebase.database().ref();
 
@@ -71,22 +69,16 @@ class App extends Component {
 				}
 				return initial;
 			}, {});
-
 		if (hash.access_token != null) {
 			this.setState({
 				accessToken: hash.access_token
 			}, () => {
 			});
 		}
-
 		dbRef.on('value', (snapshot) => {
-			
-				this.sortTracks(snapshot.val())
-			console.log(snapshot.val());
-			
+			this.sortTracks(snapshot.val())
 		})//dbref.on	
 	}
-
 	getSearch = (type, query) => {
 		this.setState({
 			artists: [],
@@ -184,7 +176,6 @@ class App extends Component {
 		}, () => {
 			this.getSong(songID);
 		})
-
 	}
 	convertDuration = (timeInMs) => {
 		const minutes = ((timeInMs / 1000) / 60).toFixed(0);
@@ -194,7 +185,6 @@ class App extends Component {
 		}
 		return `${minutes}:${seconds}`;
 	}
-
 	getAlbums = (e) => {
 		const artistId = e.target.className
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
@@ -218,7 +208,6 @@ class App extends Component {
 					type: 'albums',
 					searchResults: `Album listing for - ${res.data.items[0].artists[0].name}`
 				}, () => {
-	
 				})
 			}
 		}).catch((error) => {
@@ -229,7 +218,6 @@ class App extends Component {
 			}
 		});
 	}//getAlbums
-
 	getAlbumTracks = (e) => {
 		const albumId = e.target.className
 		const AuthStr = 'Bearer '.concat(this.state.accessToken);
@@ -261,26 +249,16 @@ class App extends Component {
 				})
 			}
 		});
-
 	}
-
 	addToSetList = (e) => {
 		dbRef.push({
 			artist: e.target.className,
 			track: e.target.id
 		})
 	}
-
 	deleteFromList = (key) => {
-		console.log(key);
-		
 		dbRef.child(key).remove();
-		console.log(key);
-				
-		console.log("delete clicked");
-		
 	}
-
 	hideResults = () => {
 		if (document.getElementById('resultsPane').classList.contains('show')) {
 			document.getElementById('resultsPane').classList.remove('show');
@@ -290,7 +268,6 @@ class App extends Component {
 			document.getElementById('resultsPane').classList.add('show');
 		}
 	}
-	
 	render() {
 		return (
 			<div className='App'>
@@ -312,10 +289,10 @@ class App extends Component {
 								<button className='button' onClick={this.hideResults}>Hide / Show Results</button>
 							</div>
 							<section className='resultsPane show' id='resultsPane'>
-								<div className="resultsContainer clearfix">
+								<div className='resultsContainer clearfix'>
 
 
-									<h2 className="resultsHeading">{this.state.searchResults}</h2>
+									<h2 className='resultsHeading'>{this.state.searchResults}</h2>
 									{this.state.type === 'artist' ? this.state.artists.map((artist) => {
 										return (
 											<figure onClick={this.getAlbums} className={artist.id} key={artist.id} id={artist.uri} >

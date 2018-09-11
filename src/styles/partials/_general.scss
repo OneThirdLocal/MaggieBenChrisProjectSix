@@ -28,28 +28,6 @@ body{
     margin: 0 auto;
 }
 
-.hide{
-    animation: test 1s;
-    animation-delay: .6s;
-    animation-fill-mode: forwards;
-    // transform: translate(+170%);
-    transform: translateY(-120%);
-}
-
-@keyframes test {
-    from{
-        position: static;
-
-    }
-    to{
-        position: absolute;
-    }
-}
-
-.show{
-    transform: translateY(0%);
-}
-
 h1,
 h2,
 h3{

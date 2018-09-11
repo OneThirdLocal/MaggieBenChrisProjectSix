@@ -10,16 +10,9 @@
 .mainHeadingContainer{
     float: left;
     width: 50%;
-}
-
-.lyricsContainer{
-    background: rgba(82, 80, 80, 0.4);
-    border-radius: 3px;
-    width: 100%;
-    padding: 20px;
-    h3{
-        margin: 0 auto;
-        padding-bottom: 40px;
+    iframe{
+        margin: 20px 0;
+        border-radius: 3px;
     }
 }
 
@@ -66,20 +59,28 @@ form{
 .searchRadioButtonsContainer{
     margin: 30px 0;
     text-align: center;
-}
-
-input[type="radio"]{
-    display: none;
-    &:checked+label{
-        // background: $primaryColor1;
-        color: #ffffff;
-        border-bottom: 2px solid $primaryColor1;
+    input[type='radio']{
+        display: none;
+        &:checked+label{
+            color: #ffffff;
+            border-bottom: 2px solid $primaryColor1;
+        }
     }
 }
 
-iframe{
-    margin: 20px 0;
+.lyricsContainer{
+    background: rgba(82, 80, 80, 0.4);
     border-radius: 3px;
+    width: 100%;
+    padding: 20px;
+    h3{
+        margin: 0 auto;
+        padding-bottom: 40px;
+    }
+}
+
+.lyrics{
+    white-space: pre-wrap;
 }
 
 .content{
@@ -91,9 +92,66 @@ iframe{
     width: calc(50% - 50px);
 }
 
+.hide{
+    animation: test 1s;
+    animation-delay: .6s;
+    animation-fill-mode: forwards;
+    transform: translateY(-120%);
+}
+
+@keyframes test {
+    from{
+        position: static;
+
+    }
+    to{
+        position: absolute;
+    }
+}
+
+.show{
+    transform: translateY(0%);
+}
+
 .resultsPane{
     transition: transform 1s, position 1.5s;
     margin: 0 auto;
+}
+
+.resultsContainer {
+    margin: 0 auto;
+    div {
+        margin-bottom: 10px;
+    }
+    button {
+        width: 22px;
+        height: 20px;
+        background: black;
+        border: none;
+        padding-bottom: 20px;
+        border-radius: 50%;
+        text-align: center;
+        a {
+            text-decoration: none;
+            color: white;
+            border-radius: 50%;
+            border: 1.5px white solid;
+            padding-bottom: 20px;
+            width: 22px;
+            height: 20px;
+            display: inline-block;
+            text-align: center;
+
+            }
+    }
+    p {
+        display: inline;
+        margin-left: 10px;
+        line-height: 26px;
+        &:hover{
+            cursor: url(../assets/favicon.ico), auto;
+        }
+    }
 }
 
 .resultsHeading, .setListHeading {
@@ -101,86 +159,39 @@ iframe{
     margin-bottom: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid white;
-}
-
-.resultsContainer {
-    margin: 0 auto;
-        div {
-            margin-bottom: 10px;
-        }
-        button {
-            width: 22px;
-            height: 20px;
-            background: black;
-            border: none;
-            padding-bottom: 20px;
-            border-radius: 50%;
-            text-align: center;
-            a {
-                text-decoration: none;
-                color: white;
-                border-radius: 50%;
-                border: 1.5px white solid;
-                padding-bottom: 20px;
-                width: 22px;
-                height: 20px;
-                display: inline-block;
-                text-align: center;
-
-                }
-        }
-
-        
-
-        p {
-            display: inline;
-            margin-left: 10px;
-            line-height: 26px;
-            &:hover{
-                cursor: url(../assets/favicon.ico), auto;
-            }
-        }
-}
-
-.setListItem {
-        li {
-            display: inline-block;
-            margin-bottom: 10px;
-            line-height: 26px;
-            &:hover{
-                cursor: url(../assets/favicon.ico), auto;
-            }
-        }
-
-        button {
-            width: 20px;
-            height: 20px;
-            background: red;
-            border: none;
-            padding-bottom: 21px;
-            border-radius: 50%;
-            color: white;
-            text-align: center;
-            margin-right: 10px;
-
-        }
-}
-
-.lyrics{
-    white-space: pre-wrap;
-}
-
-figure {
-    float: left;
-    width: 200px;
-    margin:30px 20px;
+    figure {
+        float: left;
+        width: 200px;
+        margin:30px 20px;
         img {
             width: 200px;
             height: 200px;
         }
+        figcaption {
+            height: 3rem;
+        }
+    }
 }
 
-figcaption {
-    height: 3rem;
-}
+.setListItem {
+    li {
+        display: inline-block;
+        margin-bottom: 10px;
+        line-height: 26px;
+        &:hover{
+            cursor: url(../assets/favicon.ico), auto;
+        }
+    }
+    button {
+        width: 20px;
+        height: 20px;
+        background: red;
+        border: none;
+        padding-bottom: 21px;
+        border-radius: 50%;
+        color: white;
+        text-align: center;
+        margin-right: 10px;
 
+    }
+}
