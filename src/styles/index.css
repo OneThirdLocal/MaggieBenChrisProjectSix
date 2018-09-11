@@ -170,7 +170,7 @@ h3 {
   font-family: 'Ubuntu', sans-serif;
   color: #ffffff; }
 
-.button, .lyricsButton {
+.button {
   font-family: 'Ubuntu', sans-serif;
   background: #f5c900;
   color: #000000;
@@ -179,7 +179,7 @@ h3 {
   border-radius: 3px;
   transition: .3s;
   width: 192px; }
-  .button:focus, .button:hover, .lyricsButton:focus, .lyricsButton:hover {
+  .button:focus, .button:hover {
     background: #8b98fd;
     color: #ffffff; }
 
@@ -291,7 +291,8 @@ form {
   width: 100%; }
 
 .lyricsButton {
-  display: none; }
+  margin-left: 20px;
+  margin-bottom: 20px; }
 
 .lyrics {
   white-space: pre-wrap; }
@@ -308,7 +309,7 @@ form {
   animation: test 1s;
   animation-delay: .6s;
   animation-fill-mode: forwards;
-  transform: translateY(-120%); }
+  transform: translateY(-200%); }
 
 @keyframes test {
   from {
@@ -316,7 +317,7 @@ form {
   to {
     position: absolute; } }
 
-.show, .lyricsContainer {
+.show {
   transform: translateY(0%); }
 
 .resultsPane, .lyricsContainer {
@@ -335,6 +336,10 @@ form {
     padding-bottom: 20px;
     border-radius: 50%;
     text-align: center; }
+    .resultsContainer button:focus,
+    .resultsContainer button:hover a {
+      color: #8b98fd;
+      border: 1.5px #8b98fd solid; }
     .resultsContainer button a {
       text-decoration: none;
       color: white;
@@ -349,12 +354,16 @@ form {
     display: inline;
     margin-left: 10px;
     line-height: 26px; }
-    .resultsContainer p:hover {
+    .resultsContainer p:focus, .resultsContainer p:hover {
       cursor: url(../assets/favicon.ico), auto; }
   .resultsContainer figure {
     float: left;
     width: 200px;
-    margin: 30px calc((100% - 400px) / 4); }
+    margin: 30px calc((100% - 400px) / 4);
+    transition: .3s; }
+    .resultsContainer figure:focus, .resultsContainer figure:hover {
+      transform: scale(1.1);
+      cursor: pointer; }
     .resultsContainer figure img {
       width: 200px;
       height: 200px; }
@@ -371,7 +380,7 @@ form {
   display: inline-block;
   margin-bottom: 10px;
   line-height: 26px; }
-  .setListItem li:hover {
+  .setListItem li:focus, .setListItem li:hover {
     cursor: url(../assets/favicon.ico), auto; }
 
 .setListItem button {
@@ -384,6 +393,9 @@ form {
   color: white;
   text-align: center;
   margin-right: 10px; }
+  .setListItem button:focus, .setListItem button:hover {
+    background: #ffffff;
+    color: red; }
 
 @media (max-width: 1200px) {
   .resultsContainer figure {
@@ -418,9 +430,5 @@ form {
     margin: 35px calc((100% - 300px) / 8); }
   .hide {
     transform: translateY(-700%); }
-  .lyricsButton {
-    display: block;
-    margin-bottom: 20px;
-    margin-left: 20px; }
   .lyricsContainer {
     width: 100%; } }

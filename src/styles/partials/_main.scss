@@ -84,7 +84,8 @@ form{
 }
 
 .lyricsButton {
-    display: none;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .lyrics{
@@ -104,7 +105,7 @@ form{
     animation: test 1s;
     animation-delay: .6s;
     animation-fill-mode: forwards;
-    transform: translateY(-120%);
+    transform: translateY(-200%);
 }
 
 @keyframes test {
@@ -117,7 +118,7 @@ form{
     }
 }
 
-.show, .lyricsContainer {
+.show {
     transform: translateY(0%);
 }
 
@@ -282,12 +283,6 @@ form{
 
     .hide {
         transform: translateY(-700%);
-    }
-
-    .lyricsButton {
-            display: block;
-            margin-bottom: 20px;
-            margin-left: 20px;
     }
 
     .lyricsContainer {
