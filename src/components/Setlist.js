@@ -15,11 +15,11 @@ class setList extends Component {
             <div id='setList'>
                 <h2 className='setListHeading'>Setlist</h2>
                 <ul className='setList'>
-                    {this.props.setList !== null ? Object.keys(this.props.setList).map((key) => {                        
+                    {this.props.setList !== null ? Object.keys(this.props.setList).map((key) => {
                         return (
                             <div className='setListItem' key={key}>
-                                <li key={key} className={this.props.setList[key].artist} id={this.props.setList[key].track} onClick={this.handleClick}>
-                                <button className='deleteFromListButton' onClick={() => this.props.deleteFromList(this.props.setList[key].key)}>x</button>
+                                <button tabindex='8' className='deleteFromListButton' onClick={() => this.props.deleteFromList(this.props.setList[key].key)}>x</button>
+                                <li tabindex='9' key={key} className={this.props.setList[key].artist} id={this.props.setList[key].track} onClick={this.handleClick}>
                                     {this.props.setList[key].artist} - {this.props.setList[key].track}
                                 </li>
                             </div>
