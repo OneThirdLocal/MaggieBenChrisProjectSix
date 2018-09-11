@@ -288,13 +288,10 @@ form {
 .lyricsContainer.show {
   width: 100%; }
 
-<<<<<<< HEAD
-=======
 .lyricsButton {
   margin-left: 20px;
   margin-bottom: 20px; }
 
->>>>>>> a17259f5b6a9986160fd88d764876c66e33412e9
 .lyrics {
   white-space: pre-wrap; }
 
