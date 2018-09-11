@@ -13,7 +13,7 @@ class Lyrics extends Component {
     render() {
         return (
             <section>
-                <button className='lyricsButton' onClick={this.hideLyrics}>Hide / Show Lyrics</button>
+                <button className='lyricsButton button' onClick={this.hideLyrics}>Hide / Show Lyrics</button>
                     <div className='lyricsContainer show' id='lyricsPane'>
                         <h3>{this.props.currentSong}</h3>
                         <p className='lyrics'>{this.props.lyrics}</p>

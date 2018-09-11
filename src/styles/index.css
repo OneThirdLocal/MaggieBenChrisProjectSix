@@ -170,7 +170,7 @@ h3 {
   font-family: 'Ubuntu', sans-serif;
   color: #ffffff; }
 
-.button, .lyricsButton {
+.button {
   font-family: 'Ubuntu', sans-serif;
   background: #f5c900;
   color: #000000;
@@ -179,7 +179,7 @@ h3 {
   border-radius: 3px;
   transition: .3s;
   width: 192px; }
-  .button:focus, .button:hover, .lyricsButton:focus, .lyricsButton:hover {
+  .button:focus, .button:hover {
     background: #8b98fd;
     color: #ffffff; }
 
@@ -291,7 +291,8 @@ form {
   width: 100%; }
 
 .lyricsButton {
-  display: none; }
+  margin-left: 20px;
+  margin-bottom: 20px; }
 
 .lyrics {
   white-space: pre-wrap; }
@@ -308,7 +309,7 @@ form {
   animation: test 1s;
   animation-delay: .6s;
   animation-fill-mode: forwards;
-  transform: translateY(-120%); }
+  transform: translateY(-200%); }
 
 @keyframes test {
   from {
@@ -316,7 +317,7 @@ form {
   to {
     position: absolute; } }
 
-.show, .lyricsContainer {
+.show {
   transform: translateY(0%); }
 
 .resultsPane, .lyricsContainer {
@@ -429,9 +430,5 @@ form {
     margin: 35px calc((100% - 300px) / 8); }
   .hide {
     transform: translateY(-700%); }
-  .lyricsButton {
-    display: block;
-    margin-bottom: 20px;
-    margin-left: 20px; }
   .lyricsContainer {
     width: 100%; } }
