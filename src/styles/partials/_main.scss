@@ -152,13 +152,6 @@ form{
             cursor: url(../assets/favicon.ico), auto;
         }
     }
-}
-
-.resultsHeading, .setListHeading {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid white;
     figure {
         float: left;
         width: 200px;
@@ -171,6 +164,13 @@ form{
             height: 3rem;
         }
     }
+}
+
+.resultsHeading, .setListHeading {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid white;
 }
 
 .setListItem {
