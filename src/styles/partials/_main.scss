@@ -57,7 +57,7 @@ form{
 }
 
 .searchRadioButtonsContainer{
-    margin: 30px 0;
+    margin: 15px 0 30px 0;
     text-align: center;
     input[type='radio']{
         display: none;
@@ -83,9 +83,10 @@ form{
     width: 100%;
 }
 
-// .lyricsButton {
-//     display: none;
-// }
+.lyricsButton {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
 
 .lyrics{
     white-space: pre-wrap;
@@ -104,7 +105,7 @@ form{
     animation: test 1s;
     animation-delay: .6s;
     animation-fill-mode: forwards;
-    transform: translateY(-120%);
+    transform: translateY(-700%);
 }
 
 @keyframes test {
@@ -117,7 +118,7 @@ form{
     }
 }
 
-.show, .lyricsContainer {
+.show {
     transform: translateY(0%);
 }
 
@@ -168,7 +169,7 @@ form{
     figure {
         float: left;
         width: 200px;
-        margin: 30px calc((100% - 400px) / 4);
+        margin: 20px calc((100% - 400px) / 4);
         transition: .3s;
         &:focus,
         &:hover{
@@ -180,7 +181,8 @@ form{
             height: 200px;
         }
         figcaption {
-            height: 3rem;
+            overflow: hidden;
+            height: 4rem;
         }
     }
 }
@@ -194,9 +196,8 @@ form{
 
 .setListItem {
     li {
-        display: inline-block;
-        margin-bottom: 10px;
-        line-height: 26px;
+        display: inline;
+        line-height: 30px;
         &:focus,
         &:hover{
             cursor: url(../assets/favicon.ico), auto;
@@ -227,14 +228,11 @@ form{
     .resultsContainer {
         figure {
             width: 150px;
-            margin: 25px calc((100% - 300px) / 4);
+            margin: 20px calc((100% - 300px) / 4);
 
             img {
                 width: 150px;
                 height: 150px;
-            }
-            figcaption {
-                height: 3rem;
             }
         }
     }
@@ -244,21 +242,26 @@ form{
 
 @media (max-width: 900px){
     .resultsPane {
-        margin-bottom: 100px;
+        margin-bottom: 50px;
     }
     .resultsContainer {
         figure {
             width: 75px;
-            margin: 35px calc((100% - 225px) / 6);
+            margin: 20px calc((100% - 225px) / 6);
 
             img {
                 width: 75px;
                 height: 75px;
             }
-            figcaption {
-                height: 3rem;
-            }
         }
+    }
+
+    .show {
+        display: block;
+    }
+
+    .hide {
+        display: none;
     }
 }
 //////end @900px ////////////////////
@@ -269,6 +272,10 @@ form{
         width: 100%;
     }
 
+    .mainHeadingContainer {
+        background: rgba(82, 80, 80, 0.4);
+    }
+
     .content {
         margin: 0;
     }
@@ -276,18 +283,8 @@ form{
     .resultsContainer {
         figure {
             width: 75px;
-            margin: 35px calc((100% - 300px) / 8);
+            margin: 20px calc((100% - 300px) / 8);
         }
-    }
-
-    .hide {
-        transform: translateY(-700%);
-    }
-
-    .lyricsButton {
-            display: block;
-            margin-bottom: 20px;
-            margin-left: 20px;
     }
 
     .lyricsContainer {
@@ -296,3 +293,46 @@ form{
 
 }
 //////end @700px ////////////////////
+
+@media (max-width: 475px) {
+    .resultsPane {
+        margin-bottom: 30px;
+    }
+
+    .resultsContainer {
+        figure {
+            width: 75px;
+            margin: 35px calc((100% - 225px) / 6);
+
+            img {
+                width: 75px;
+                height: 75px;
+            }
+        }
+    }
+
+    .searchRadioButtonsContainer {
+        margin-bottom: 5px;
+            button {
+            margin-top: 20px;
+            }
+        }
+
+    .lyricsSection {
+        text-align: center;
+    }
+
+    .lyricsButton {
+        margin-left: 0;
+    }
+
+    .resultsHeading, .setList, .lyrics {
+        text-align: left;
+        }
+
+    .content {
+        text-align: center;
+
+        
+    }
+}

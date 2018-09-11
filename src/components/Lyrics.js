@@ -12,13 +12,13 @@ class Lyrics extends Component {
     }
     render() {
         return (
-            <Fragment>
-                <button className='lyricsButton' onClick={this.hideLyrics}>Hide / Show Lyrics</button>
-                <section className='lyricsContainer show' id='lyricsPane'>
-                        <h3>{this.props.currentSong}</h3>
-                        <p className='lyrics'>{this.props.lyrics}</p>
-                </section>
-            </Fragment>
+            <section className="lyricsSection">
+                <button className='lyricsButton button' onClick={this.hideLyrics}>Hide / Show Lyrics</button>
+                <div className='lyricsContainer show' id='lyricsPane'>
+                    <h3>{this.props.currentSong}</h3>
+                    <p className='lyrics'>{this.props.lyrics}</p>
+                </div>
+            </section>
         );
     }
 }

@@ -146,7 +146,7 @@ class App extends Component {
 		const tempSong = song.split('-');
 		const songName = tempSong[0];
 		axios({
-			url: `http://lyric-api.herokuapp.com/api/find/${artist}/${songName}`,
+			url: `https://lyric-api.herokuapp.com/api/find/${artist}/${songName}`,
 			dataResponse: 'json',
 		}).then((res) => {
 			if (res.data.lyric) {
