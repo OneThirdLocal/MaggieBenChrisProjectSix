@@ -19,7 +19,7 @@ class setList extends Component {
                         return (
                             <div className='setListItem' key={key}>
                                 <button tabindex='8' className='deleteFromListButton' onClick={() => this.props.deleteFromList(this.props.setList[key].key)}>x</button>
-                                <li tabindex='9' key={key} className={this.props.setList[key].artist} id={this.props.setList[key].track} onClick={this.handleClick}>
+                                <li tabindex='9' onKeyPress={this.handleClick} key={key} className={this.props.setList[key].artist} id={this.props.setList[key].track} onClick={this.handleClick}>
                                     {this.props.setList[key].artist} - {this.props.setList[key].track}
                                 </li>
                             </div>

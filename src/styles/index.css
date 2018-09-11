@@ -335,6 +335,10 @@ form {
     padding-bottom: 20px;
     border-radius: 50%;
     text-align: center; }
+    .resultsContainer button:focus,
+    .resultsContainer button:hover a {
+      color: #8b98fd;
+      border: 1.5px #8b98fd solid; }
     .resultsContainer button a {
       text-decoration: none;
       color: white;
@@ -349,12 +353,16 @@ form {
     display: inline;
     margin-left: 10px;
     line-height: 26px; }
-    .resultsContainer p:hover {
+    .resultsContainer p:focus, .resultsContainer p:hover {
       cursor: url(../assets/favicon.ico), auto; }
   .resultsContainer figure {
     float: left;
     width: 200px;
-    margin: 30px calc((100% - 400px) / 4); }
+    margin: 30px calc((100% - 400px) / 4);
+    transition: .3s; }
+    .resultsContainer figure:focus, .resultsContainer figure:hover {
+      transform: scale(1.1);
+      cursor: pointer; }
     .resultsContainer figure img {
       width: 200px;
       height: 200px; }
@@ -371,7 +379,7 @@ form {
   display: inline-block;
   margin-bottom: 10px;
   line-height: 26px; }
-  .setListItem li:hover {
+  .setListItem li:focus, .setListItem li:hover {
     cursor: url(../assets/favicon.ico), auto; }
 
 .setListItem button {
@@ -384,6 +392,9 @@ form {
   color: white;
   text-align: center;
   margin-right: 10px; }
+  .setListItem button:focus, .setListItem button:hover {
+    background: #ffffff;
+    color: red; }
 
 @media (max-width: 1200px) {
   .resultsContainer figure {
