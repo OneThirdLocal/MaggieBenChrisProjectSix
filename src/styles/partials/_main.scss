@@ -71,12 +71,20 @@ form{
 .lyricsContainer{
     background: rgba(82, 80, 80, 0.4);
     border-radius: 3px;
-    width: 100%;
+    width: 50%;
     padding: 20px;
     h3{
         margin: 0 auto;
         padding-bottom: 40px;
     }
+}
+
+.lyricsContainer.show{
+    width: 100%;
+}
+
+.lyricsButton {
+    display: none;
 }
 
 .lyrics{
@@ -109,11 +117,11 @@ form{
     }
 }
 
-.show{
+.show, .lyricsContainer {
     transform: translateY(0%);
 }
 
-.resultsPane{
+.resultsPane, .lyricsContainer{
     transition: transform 1s, position 1.5s;
     margin: 0 auto;
 }
@@ -155,7 +163,7 @@ form{
     figure {
         float: left;
         width: 200px;
-        margin:30px 20px;
+        margin: 30px calc((100% - 400px) / 4);
         img {
             width: 200px;
             height: 200px;
@@ -195,3 +203,80 @@ form{
 
     }
 }
+
+////////////////////MEDIA QUERIES/////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+@media (max-width: 1200px){
+    .resultsContainer {
+        figure {
+            width: 150px;
+            margin: 25px calc((100% - 300px) / 4);
+
+            img {
+                width: 150px;
+                height: 150px;
+            }
+            figcaption {
+                height: 3rem;
+            }
+        }
+    }
+
+}
+//////end @1200px ////////////////////
+
+@media (max-width: 900px){
+    .resultsPane {
+        margin-bottom: 100px;
+    }
+    .resultsContainer {
+        figure {
+            width: 75px;
+            margin: 35px calc((100% - 225px) / 6);
+
+            img {
+                width: 75px;
+                height: 75px;
+            }
+            figcaption {
+                height: 3rem;
+            }
+        }
+    }
+}
+//////end @900px ////////////////////
+
+@media (max-width: 700px){
+    .mainHeadingContainer, .content {
+        float: none;
+        width: 100%;
+    }
+
+    .content {
+        margin: 0;
+    }
+
+    .resultsContainer {
+        figure {
+            width: 75px;
+            margin: 35px calc((100% - 300px) / 8);
+        }
+    }
+
+    .hide {
+        transform: translateY(-700%);
+    }
+
+    .lyricsButton {
+            display: block;
+            margin-bottom: 20px;
+            margin-left: 20px;
+    }
+
+    .lyricsContainer {
+        width: 100%;
+    }
+
+}
+//////end @700px ////////////////////

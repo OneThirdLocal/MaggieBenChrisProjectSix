@@ -170,20 +170,25 @@ h3 {
   font-family: 'Ubuntu', sans-serif;
   color: #ffffff; }
 
-.button {
+.button, .lyricsButton {
   font-family: 'Ubuntu', sans-serif;
   background: #f5c900;
   color: #000000;
   border: none;
   padding: 10px 20px;
   border-radius: 3px;
-  transition: .3s; }
-  .button:hover {
+  transition: .3s;
+  width: 192px; }
+  .button:hover, .lyricsButton:hover {
     background: #8b98fd;
     color: #ffffff; }
 
 li {
   list-style-type: none; }
+
+@media (max-width: 700px) {
+  .wrapper {
+    width: 550px; } }
 
 @media (max-width: 600px) {
   .button:hover {
@@ -211,7 +216,7 @@ li {
     .header .headerText h1 {
       font-size: 5rem; }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .header .headerText {
     padding-left: 25px; }
     .header .headerText h1 {
@@ -278,11 +283,17 @@ form {
 .lyricsContainer {
   background: rgba(82, 80, 80, 0.4);
   border-radius: 3px;
-  width: 100%;
+  width: 50%;
   padding: 20px; }
   .lyricsContainer h3 {
     margin: 0 auto;
     padding-bottom: 40px; }
+
+.lyricsContainer.show {
+  width: 100%; }
+
+.lyricsButton {
+  display: none; }
 
 .lyrics {
   white-space: pre-wrap; }
@@ -307,10 +318,10 @@ form {
   to {
     position: absolute; } }
 
-.show {
+.show, .lyricsContainer {
   transform: translateY(0%); }
 
-.resultsPane {
+.resultsPane, .lyricsContainer {
   transition: transform 1s, position 1.5s;
   margin: 0 auto; }
 
@@ -345,7 +356,7 @@ form {
   .resultsContainer figure {
     float: left;
     width: 200px;
-    margin: 30px 20px; }
+    margin: 30px calc((100% - 400px) / 4); }
     .resultsContainer figure img {
       width: 200px;
       height: 200px; }
@@ -375,3 +386,43 @@ form {
   color: white;
   text-align: center;
   margin-right: 10px; }
+
+@media (max-width: 1200px) {
+  .resultsContainer figure {
+    width: 150px;
+    margin: 25px calc((100% - 300px) / 4); }
+    .resultsContainer figure img {
+      width: 150px;
+      height: 150px; }
+    .resultsContainer figure figcaption {
+      height: 3rem; } }
+
+@media (max-width: 900px) {
+  .resultsPane {
+    margin-bottom: 100px; }
+  .resultsContainer figure {
+    width: 75px;
+    margin: 35px calc((100% - 225px) / 6); }
+    .resultsContainer figure img {
+      width: 75px;
+      height: 75px; }
+    .resultsContainer figure figcaption {
+      height: 3rem; } }
+
+@media (max-width: 700px) {
+  .mainHeadingContainer, .content {
+    float: none;
+    width: 100%; }
+  .content {
+    margin: 0; }
+  .resultsContainer figure {
+    width: 75px;
+    margin: 35px calc((100% - 300px) / 8); }
+  .hide {
+    transform: translateY(-700%); }
+  .lyricsButton {
+    display: block;
+    margin-bottom: 20px;
+    margin-left: 20px; }
+  .lyricsContainer {
+    width: 100%; } }

@@ -35,7 +35,7 @@ h3{
     color: #ffffff;
 }
 
-.button{
+.button, .lyricsButton{
     font-family: 'Ubuntu', sans-serif;
     background: $primaryColor3;
     color: #000000;
@@ -43,6 +43,8 @@ h3{
     padding: 10px 20px;
     border-radius: 3px;
     transition: .3s;
+    width: 192px;
+    &:focus,
     &:hover{
         background: $primaryColor2;
         color: #ffffff;
@@ -53,7 +55,13 @@ li{
     list-style-type: none;
 }
 
-@media (max-width: 600px){
+////////////////////MEDIA QUERIES/////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+@media (max-width: 700px){
+    .wrapper {
+        width: 550px;
+    }
     .button{
         &:hover{
             background: $primaryColor3;
@@ -64,4 +72,6 @@ li{
             color: #ffffff;
         }
     }
+
 }
+//////end @700px ////////////////////
