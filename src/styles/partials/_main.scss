@@ -139,6 +139,11 @@ form{
         padding-bottom: 20px;
         border-radius: 50%;
         text-align: center;
+        &:focus,
+        &:hover a{
+            color: $primaryColor2;
+            border: 1.5px $primaryColor2 solid;
+        }
         a {
             text-decoration: none;
             color: white;
@@ -149,13 +154,13 @@ form{
             height: 20px;
             display: inline-block;
             text-align: center;
-
-            }
+        }
     }
     p {
         display: inline;
         margin-left: 10px;
         line-height: 26px;
+        &:focus,
         &:hover{
             cursor: url(../assets/favicon.ico), auto;
         }
@@ -164,6 +169,12 @@ form{
         float: left;
         width: 200px;
         margin: 30px calc((100% - 400px) / 4);
+        transition: .3s;
+        &:focus,
+        &:hover{
+            transform: scale(1.1);
+            cursor: pointer;
+        }
         img {
             width: 200px;
             height: 200px;
@@ -186,6 +197,7 @@ form{
         display: inline-block;
         margin-bottom: 10px;
         line-height: 26px;
+        &:focus,
         &:hover{
             cursor: url(../assets/favicon.ico), auto;
         }
@@ -200,7 +212,11 @@ form{
         color: white;
         text-align: center;
         margin-right: 10px;
-
+        &:focus,
+        &:hover{
+            background: #ffffff;
+            color: red;
+        }
     }
 }
 

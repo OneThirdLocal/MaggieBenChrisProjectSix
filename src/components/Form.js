@@ -41,25 +41,34 @@ class Form extends Component {
         return (
             <div>
                 <form className='searchForm' onSubmit={this.handleSubmit}>
-                    <input className='searchQueryContainer' required type='search'
+                    <input tabindex='1' className='searchQueryContainer' required type='search'
                         id='searchQuery'
                         value={this.state.searchQuery}
                         placeholder='Enter an artist or song'
                         onChange={this.handleChange} />
+<<<<<<< HEAD
+=======
+
+>>>>>>> 59f0315b1976f25daf325bf393a9ab398432d35d
                     <div className='searchRadioButtonsContainer'>
                         <input className='artistRadioButton' type='radio'
                             id='artistSearch'
                             value='artist'
                             checked={this.state.searchOption === 'artist'}
                             onChange={this.handleChange} />
+<<<<<<< HEAD
                         <label htmlFor='artistSearch'>Artist</label>
+=======
+                        <label tabindex='2' htmlFor='artistSearch'>Artist</label>
+
+>>>>>>> 59f0315b1976f25daf325bf393a9ab398432d35d
                         <input className='trackRadioButton' type='radio'
                             id='trackSearch'
                             value='track'
                             checked={this.state.searchOption === 'track'}
                             onChange={this.handleChange} />
-                        <label htmlFor='trackSearch'>Track</label>
-                        <button className='button'>Search</button>
+                        <label tabindex='3' htmlFor='trackSearch'>Track</label>
+                        <button tabindex='4' className='button'>Search</button>
                     </div>
                 </form>
             </div>
