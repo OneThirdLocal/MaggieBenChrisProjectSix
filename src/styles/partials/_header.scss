@@ -1,3 +1,5 @@
+//  Start of header styling
+
 .header{
     background-image: url(../assets/microphoneBackground.jpg);
 	background-repeat: no-repeat;
@@ -20,6 +22,8 @@
     }
 }
 
+//  End of header styking
+
 @media (max-width: 700px){
     .header .headerText {
         padding-left: 25px;
@@ -31,3 +35,5 @@
         }
     }
 }
+
+//////end @700px ////////////////////

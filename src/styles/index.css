@@ -162,7 +162,8 @@ body {
 .wrapper {
   max-width: 1200px;
   width: 90%;
-  margin: 0 auto; }
+  margin: 0 auto;
+  min-height: 95vh; }
 
 h1,
 h2,
@@ -187,6 +188,8 @@ li {
   list-style-type: none; }
 
 @media (max-width: 900px) {
+  .wrapper {
+    min-height: 90vh; }
   .button:hover {
     background: #f5c900;
     color: #000000; }
@@ -428,7 +431,7 @@ form {
   .mainHeadingContainer {
     background: rgba(82, 80, 80, 0.4); }
   .content {
-    margin: 0; }
+    margin: 0 0 20px 0; }
   .resultsContainer figure {
     width: 75px;
     margin: 20px calc((100% - 300px) / 8); }
@@ -476,3 +479,10 @@ form {
     text-align: left; }
   .content {
     text-align: center; } }
+
+footer {
+  text-align: center;
+  font-style: oblique;
+  background: transparent; }
+  footer p {
+    padding-bottom: 20px; }
