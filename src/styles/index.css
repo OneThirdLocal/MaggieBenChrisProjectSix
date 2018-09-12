@@ -241,10 +241,12 @@ li {
   .mainHeading h1 {
     padding-bottom: 10px;
     border-bottom: 1px solid #4913f3;
-    width: 75%; }
+    width: 75%;
+    margin-left: 20px; }
   .mainHeading h3 {
     padding-top: 10px;
-    width: 75%; }
+    width: 75%;
+    margin-left: 20px; }
 
 form {
   padding-top: 20px;
@@ -261,7 +263,9 @@ form {
     margin: 5px; }
 
 .searchQueryContainer {
-  width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: calc(100% - 40px);
   height: 30px;
   text-align: center;
   border: none;
@@ -468,7 +472,7 @@ form {
     text-align: center; }
   .lyricsButton {
     margin-left: 0; }
-  .resultsHeading, .setList, .lyrics {
+  .resultsHeading, .setList, .lyrics, .resultsContainer {
     text-align: left; }
   .content {
     text-align: center; } }
