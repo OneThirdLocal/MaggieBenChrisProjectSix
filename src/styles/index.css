@@ -186,7 +186,7 @@ h3 {
 li {
   list-style-type: none; }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .button:hover {
     background: #f5c900;
     color: #000000; }
@@ -241,10 +241,12 @@ li {
   .mainHeading h1 {
     padding-bottom: 10px;
     border-bottom: 1px solid #4913f3;
-    width: 75%; }
+    width: 75%;
+    margin-left: 20px; }
   .mainHeading h3 {
     padding-top: 10px;
-    width: 75%; }
+    width: 75%;
+    margin-left: 20px; }
 
 form {
   padding-top: 20px;
@@ -261,7 +263,9 @@ form {
     margin: 5px; }
 
 .searchQueryContainer {
-  width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: calc(100% - 40px);
   height: 30px;
   text-align: center;
   border: none;
@@ -334,7 +338,7 @@ form {
     padding-bottom: 20px;
     border-radius: 50%;
     text-align: center; }
-    .resultsContainer button:focus,
+    .resultsContainer button:focus a,
     .resultsContainer button:hover a {
       color: #8b98fd;
       border: 1.5px #8b98fd solid; }
@@ -352,7 +356,7 @@ form {
     display: inline;
     margin-left: 10px;
     line-height: 26px; }
-    .resultsContainer p:focus, .resultsContainer p:hover {
+    .resultsContainer p:hover {
       cursor: url(../assets/favicon.ico), auto; }
   .resultsContainer figure {
     float: left;
@@ -378,7 +382,7 @@ form {
 .setListItem li {
   display: inline;
   line-height: 30px; }
-  .setListItem li:focus, .setListItem li:hover {
+  .setListItem li:hover {
     cursor: url(../assets/favicon.ico), auto; }
 
 .setListItem button {
@@ -428,8 +432,28 @@ form {
   .resultsContainer figure {
     width: 75px;
     margin: 20px calc((100% - 300px) / 8); }
+  .resultsContainer button:hover a {
+    color: white;
+    border: 1.5px white solid; }
+    .resultsContainer button:hover a:active a {
+      color: #8b98fd;
+      border: 1.5px #8b98fd solid; }
+  .resultsContainer p:hover {
+    cursor: default; }
+    .resultsContainer p:hover:active {
+      cursor: url(../assets/favicon.ico), auto; }
   .lyricsContainer {
-    width: 100%; } }
+    width: 100%; }
+  .setListItem li:hover {
+    cursor: default; }
+    .setListItem li:hover:active {
+      cursor: url(../assets/favicon.ico), auto; }
+  .setListItem button:hover {
+    background: red;
+    color: white; }
+    .setListItem button:hover:active {
+      background: #ffffff;
+      color: red; } }
 
 @media (max-width: 475px) {
   .resultsPane {
@@ -448,7 +472,7 @@ form {
     text-align: center; }
   .lyricsButton {
     margin-left: 0; }
-  .resultsHeading, .setList, .lyrics {
+  .resultsHeading, .setList, .lyrics, .resultsContainer {
     text-align: left; }
   .content {
     text-align: center; } }
