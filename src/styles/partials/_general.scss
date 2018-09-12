@@ -26,6 +26,7 @@ body{
     max-width: 1200px;
     width: 90%;
     margin: 0 auto;
+    min-height: 95vh;
 }
 
 h1,
@@ -59,6 +60,10 @@ li{
 /////////////////////////////////////////////////////////////////////
 
 @media (max-width: 900px){
+    .wrapper {
+        min-height: 90vh;
+    }
+
     .button{
         &:hover{
             background: $primaryColor3;

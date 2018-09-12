@@ -1,0 +1,329 @@
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
+  display: block; }
+
+audio, canvas, video {
+  display: inline-block; }
+
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+[hidden] {
+  display: none; }
+
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
+a:focus {
+  outline: thin dotted; }
+
+a:active, a:hover {
+  outline: 0; }
+
+h1 {
+  font-size: 2em; }
+
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+b, strong {
+  font-weight: 700; }
+
+dfn {
+  font-style: italic; }
+
+mark {
+  background: #ff0;
+  color: #000; }
+
+code, kbd, pre, samp {
+  font-family: monospace, serif;
+  font-size: 1em; }
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word; }
+
+q {
+  quotes: \201C \201D \2018 \2019; }
+
+small {
+  font-size: 80%; }
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -.5em; }
+
+sub {
+  bottom: -.25em; }
+
+img {
+  border: 0; }
+
+svg:not(:root) {
+  overflow: hidden; }
+
+fieldset {
+  border: 1px solid silver;
+  margin: 0 2px;
+  padding: .35em .625em .75em; }
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0; }
+
+button, input {
+  line-height: normal; }
+
+button, html input[type=button], input[type=reset], input[type=submit] {
+  -webkit-appearance: button;
+  cursor: pointer; }
+
+button[disabled], input[disabled] {
+  cursor: default; }
+
+input[type=checkbox], input[type=radio] {
+  box-sizing: border-box;
+  padding: 0; }
+
+input[type=search] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box; }
+
+input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+textarea {
+  overflow: auto;
+  vertical-align: top; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body, figure {
+  margin: 0; }
+
+legend, button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: '';
+  clear: both;
+  height: 0; }
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.visuallyhidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0);
+  overflow: hidden; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+img {
+  max-width: 100%; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Work Sans', sans-serif;
+  background: #000000;
+  color: #ffffff; }
+
+.wrapper {
+  max-width: 1200px;
+  width: 95%;
+  margin: 0 auto; }
+
+.hide {
+  animation: test 1s;
+  animation-delay: .6s;
+  animation-fill-mode: forwards;
+  transform: translateY(-120%); }
+
+@keyframes test {
+  from {
+    position: static; }
+  to {
+    position: absolute; } }
+
+.show {
+  transform: translateY(0%); }
+
+h1,
+h2,
+h3 {
+  font-family: 'Ubuntu', sans-serif;
+  color: #ffffff; }
+
+.button {
+  font-family: 'Ubuntu', sans-serif;
+  background: #f5c900;
+  color: #000000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  transition: .3s; }
+  .button:hover {
+    background: #8b98fd;
+    color: #ffffff; }
+
+li {
+  list-style-type: none; }
+
+@media (max-width: 600px) {
+  .button:hover {
+    background: #f5c900;
+    color: #000000; }
+  .button:active {
+    background: #8b98fd;
+    color: #ffffff; } }
+
+.header {
+  background-image: url(../assets/microphoneBackground.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh; }
+  .header .headerText {
+    color: #ffffff;
+    text-transform: uppercase;
+    width: 60%;
+    padding-top: 15%;
+    padding-bottom: 5%; }
+    .header .headerText h1,
+    .header .headerText h3 {
+      padding: 30px 0; }
+    .header .headerText h1 {
+      font-size: 5rem; }
+
+@media (max-width: 600px) {
+  .header .headerText {
+    padding-left: 25px; }
+    .header .headerText h1 {
+      font-size: 3.5rem; }
+    .header .headerText h3 {
+      display: none; } }
+
+.mainHeader {
+  background-image: url(../assets/microphoneBackground.jpg);
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh; }
+
+.mainHeadingContainer {
+  float: left;
+  width: 50%; }
+
+.lyricsContainer {
+  background: rgba(82, 80, 80, 0.4);
+  border-radius: 3px;
+  width: 100%;
+  padding: 20px; }
+  .lyricsContainer h3 {
+    margin: 0 auto;
+    padding-bottom: 40px; }
+
+.mainHeading {
+  padding: 20px 0;
+  text-transform: uppercase; }
+  .mainHeading h1 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4913f3; }
+  .mainHeading h3 {
+    padding-top: 10px; }
+
+form {
+  padding-top: 20px;
+  text-transform: uppercase;
+  text-align: center; }
+  form label {
+    padding: 5px 10px;
+    margin: 5px;
+    color: lightgray; }
+    form label:hover {
+      cursor: pointer;
+      color: #ffffff; }
+  form button {
+    margin: 5px; }
+
+.searchQueryContainer {
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  border: none;
+  border-radius: 3px; }
+
+.searchRadioButtonsContainer {
+  margin: 30px 0;
+  text-align: center; }
+
+input[type="radio"] {
+  display: none; }
+  input[type="radio"]:checked + label {
+    color: #ffffff;
+    border-bottom: 2px solid #4913f3; }
+
+iframe {
+  margin: 20px 0;
+  border-radius: 3px; }
+
+.content {
+  background: rgba(82, 80, 80, 0.4);
+  padding: 20px;
+  margin: 20px 0 20px 50px;
+  border-radius: 3px;
+  float: left;
+  width: calc(50% - 50px); }
+
+.resultsPane {
+  transition: transform 1s, position 1.5s;
+  margin: 0 auto; }
+
+.resultsContainer {
+  margin: 0 auto; }
+
+.lyrics {
+  white-space: pre-wrap; }
+
+figure {
+  float: left;
+  width: 200px;
+  margin: 30px 20px; }
+  figure img {
+    width: 200px;
+    height: 200px; }
+
+figcaption {
+  height: 3rem; }

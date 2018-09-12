@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-//show the artist and track from app.js state 
+//  the setlist component displays songs that have been saved to the setlist (and accompanying firebase datase)
+
+//  NODE MODULES
+import React, { Component } from 'react'; 
 
 class setList extends Component {
     constructor() {
@@ -7,6 +9,7 @@ class setList extends Component {
         this.state = {
         }
     }
+    //  handleClick listens for when the song title / artist have been clicked on in the setlist and then getLyrics is called in App.js to pull down the corresponding lyrics
     handleClick = (e) => {
         this.props.getLyrics(e.target.className, e.target.id)
     }
@@ -15,6 +18,7 @@ class setList extends Component {
             <div id='setList'>
                 <h2 className='setListHeading'>Setlist</h2>
                 <ul className='setList'>
+                    {/* map through the passed in setList from firebase to render the songs that have been saved, also adding in a button to remove a song from the setlist, if there are no songs, then the appropriate message is displayed */}
                     {this.props.setList !== null ? Object.keys(this.props.setList).map((key) => {
                         return (
                             <div className='setListItem' key={key}>
@@ -24,7 +28,7 @@ class setList extends Component {
                                 </li>
                             </div>
                         )
-                    })//map
+                    })
                         : 'You have no saved songs.'
                     }
                 </ul>

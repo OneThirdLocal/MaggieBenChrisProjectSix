@@ -1,3 +1,5 @@
+//  Start of mainHeader area styling
+
 .mainHeader{
     background-image: url(../assets/microphoneBackground.jpg);
     background-position: top right;
@@ -31,6 +33,10 @@
         margin-left: 20px;
     }
 }
+
+//  End of mainHeader area styling
+
+//  Start of search form styling
 
 form{
     padding-top: 20px;
@@ -71,6 +77,10 @@ form{
         }
     }
 }
+
+//  End of search form styling
+
+//  Start of lyrics area styling
 
 .lyricsContainer{
     background: rgba(82, 80, 80, 0.4);
@@ -125,6 +135,10 @@ form{
 .show {
     transform: translateY(0%);
 }
+
+//  End of lyrics area styling
+
+//  Start of results area styling
 
 .resultsPane, .lyricsContainer{
     transition: transform 1s, position 1.5s;
@@ -197,6 +211,10 @@ form{
     border-bottom: 1px solid white;
 }
 
+//  End of llyrics area styling
+
+//  Start of setList area styling
+
 .setListItem {
     li {
         display: inline;
@@ -222,6 +240,8 @@ form{
         }
     }
 }
+
+//  End of setList area styling
 
 ////////////////////MEDIA QUERIES/////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -279,7 +299,7 @@ form{
     }
 
     .content {
-        margin: 0;
+        margin: 0 0 20px 0;
     }
 
     .resultsContainer {
@@ -369,3 +389,4 @@ form{
         
     }
 }
+//////end @450px ////////////////////
